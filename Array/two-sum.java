@@ -5,13 +5,14 @@ class Solution {
         Map <Integer,Integer> freqMap =  new HashMap <Integer,Integer>(); 
         
         for (int i = 0; i < nums.length; i++) {
-           
-            if (freqMap.containsKey(nums[i])) {
-                result[0] = freqMap.get(nums[i]);
+            // checks if the diffrence amount from this number to target is on map
+            if (freqMap.containsKey(target - nums[i])) {
+                result[0] = freqMap.get(target - nums[i]);
                 result[1] = i;
+                break;
             } else {
-                int diff = target - nums[i];
-                freqMap.put(diff, i);
+                // puts new item in the map 
+                freqMap.put(nums[i], i);
             }
         }
     
