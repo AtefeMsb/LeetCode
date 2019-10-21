@@ -1,3 +1,6 @@
+/*
+keeping max and secondMax, makes it easy to find out if max is bigger than twice all other elements
+*/
 class Solution {
     public int dominantIndex(int[] nums) {
         
