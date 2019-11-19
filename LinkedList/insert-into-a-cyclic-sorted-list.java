@@ -28,6 +28,7 @@ class Solution {
             if (pre.val <= insertVal && insertVal <= cur.val) {
                 break;
             }
+            // end of the ascending list
             if (pre.val > cur.val) {
                 if (insertVal <= cur.val || insertVal >= pre.val) break;
             }
