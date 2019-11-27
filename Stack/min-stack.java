@@ -1,5 +1,5 @@
 // TWO STACKS
-/*
+
 class MinStack {
     // stack: store the stack numbers
     private Stack<Integer> stack = new Stack<Integer>();
@@ -28,10 +28,10 @@ class MinStack {
         return minStack.peek();
     }
 }
-*/
+
 
 // ONE STACK - pushing the second min always before the new min
-/*
+
 class MinStack {
     int min = Integer.MAX_VALUE;
     Stack<Integer> stack = new Stack<Integer>();
@@ -59,7 +59,7 @@ class MinStack {
         return min;
     }
 }
-*/
+
 
 // LINKEDLIST
 class MinStack {
