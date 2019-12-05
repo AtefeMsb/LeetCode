@@ -116,4 +116,36 @@ public List<Integer> postorderTraversal(TreeNode root) {
         }
         return results;
     }
+
+// using two stacks
+public List<Integer> postorderTraversal(TreeNode root) {
+
+    Stack<TreeNode> s1 = new Stack();
+    Stack<TreeNode> s2 = new Stack();
+    List<Integer> results = new ArrayList<>();
+
+    if (root == null) {
+      return results;
+    }
+
+    s1.push(root);
+    while (!s1.isEmpty()) {
+
+        TreeNode cur = s1.pop();
+        s2.push(cur);
+
+        if (cur.left != null) {
+            s1.push(cur.left);
+        }
+
+         if (cur.right != null) {
+            s1.push(cur.right);
+        } 
+     }
+
+    while (!s2.isEmpty()) {
+        results.add(s2.pop().val);
+    }
+    return results;
+}
     
