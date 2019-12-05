@@ -48,4 +48,34 @@
         postorderTraversal(root, result);
         return result;
     }
+
+    // manipulating the result
+    public List<Integer> postorderTraversal(TreeNode root) {
+        
+        Stack<TreeNode> stack = new Stack();
+        List<Integer> results = new ArrayList<>();
+        
+        if (root == null) {
+          return results;
+        }
+
+        stack.add(root);
+        
+        // how we traverse:         top to bottom && left to right
+        // what post order wants:   bottom to top && left to right
+        while (!stack.isEmpty()) {
+            
+          TreeNode node = stack.pop();
+          results.add(0, node.val);
+            
+          if (node.left != null) {
+            stack.add(node.left);
+          }
+            
+          if (node.right != null) {
+            stack.add(node.right);
+          }
+        }
+        return results;
+    }
     
