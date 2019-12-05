@@ -6,16 +6,18 @@
         TreeNode cur = root;
         
         while (cur != null || !stack.isEmpty()) {
-            // see all the lefts
+            
+            // see all the lefts - push all left nodes to stack
             while (cur != null) {
                 stack.push(cur);
                 cur = cur.left;
             }
-            
+            // current is NULL
             cur = stack.pop();
             result.add(cur.val);
             cur = cur.right;
         }
+        
         return result;
     } 
     
