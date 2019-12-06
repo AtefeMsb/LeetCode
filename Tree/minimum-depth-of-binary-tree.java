@@ -30,6 +30,8 @@
         return level;
     }
     
+//-----------------------------------------------------------------------------------------------------
+
     // recursive
     public int minDepth(TreeNode root) {
         
@@ -39,6 +41,35 @@
       return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
 
     }
+
+//-----------------------------------------------------------------------------------------------------
+
+    // recursive - using helper function
+    public int minDepth(TreeNode root){
+        if (root == null){
+            return 0;
+        }
+        return helper(root);
+    }
+
+    public int helper(TreeNode root) {
+        
+    if (root == null){
+        return Integer.MAX_VALUE;
+    }
+        
+    if (root.left == null && root.right == null){
+        return 1;
+    }
+
+    int depthLeft = helper(root.left);
+    int depthRight = helper(root.right);
+
+    return Math.min(depthLeft, depthRight) + 1;
+        
+    }
+
+//-----------------------------------------------------------------------------------------------------
     
     // dfs - preorder - MUST visit all the nodes
     // The idea is to visit each leaf with the DFS strategy, while updating the minimum depth
