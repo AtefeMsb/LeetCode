@@ -36,3 +36,52 @@
         */
         return root;
     }
+//--------------------------------------------------------------------------------------------------
+
+    // iterative - saving parents
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        
+        // save each node and its parent
+        Map<TreeNode, TreeNode> parents = new HashMap<>();
+        
+        // queue for bfs
+        Queue<TreeNode> queue = new LinkedList<>();
+        
+        if (root == null) { return null;}
+        queue.offer(root);
+        parents.put(root, null);
+        
+        // stop when bot p and q were found
+        while (!parents.containsKey(p) || !parents.containsKey(q)) {
+            
+            TreeNode cur = queue.poll();
+        
+            if (cur.left != null) {
+                queue.offer(cur.left);
+                parents.put(cur.left, cur);
+            }
+
+            if (cur.right != null) {
+                queue.offer(cur.right);
+                parents.put(cur.right, cur);
+            }
+
+        }
+        
+        // Ancestors set() for node p.
+        Set<TreeNode> pAncestors = new HashSet<>();
+        
+        // add all ancestors of p to a set
+        while (p != null) {
+            pAncestors.add(p);
+            p = parents.get(p);
+        }
+        
+        // The first ancestor of q which appears in
+        // p's ancestor set() is their lowest common ancestor.
+        while (!pAncestors.contains(q)) {
+            q = parents.get(q);
+        }
+        
+        return q; 
+    }
