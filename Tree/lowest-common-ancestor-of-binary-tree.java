@@ -37,6 +37,17 @@
         return root;
     }
 //--------------------------------------------------------------------------------------------------
+      /*
+      Algorithm
+
+      1- Start from the root node and traverse the tree.
+      2- Until we find p and q both, keep storing the parent pointers in a dictionary.
+      3- Once we have found both p and q, we get all the ancestors for p using the parent
+      dictionary and add to a set called ancestors.
+      4- Similarly, we traverse through ancestors for node q. If the ancestor is present in
+      the ancestors set for p, this means this is the first ancestor common between p and q (while traversing upwards)
+      and hence this is the LCA node.
+      */
 
     // iterative - saving parents
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
