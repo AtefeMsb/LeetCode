@@ -33,6 +33,7 @@
         return results;
     }
 }
+// ----------------------------------------------------
 
     // recursive
     private void postorderTraversal(TreeNode root, List result) {
@@ -48,6 +49,7 @@
         postorderTraversal(root, result);
         return result;
     }
+// --------------------------------------------------
 
     // manipulating the result
     // Iterative push to the begining of array
@@ -80,42 +82,7 @@
         }
         return results;
     }
-
-// iterative using set and stack
-public List<Integer> postorderTraversal(TreeNode root) {
-        
-        // one set - one stack
-        Stack<TreeNode> stack = new Stack();
-        Set<TreeNode> set = new HashSet<>();
-        List<Integer> results = new ArrayList<>();
-        
-        if (root == null) {
-            return results;
-        }
-        
-        stack.push(root); 
-        while (!stack.isEmpty()) {
-            TreeNode cur = stack.pop();
-            
-            if (!set.contains(cur)) {
-                stack.push(cur);
-                
-                if (cur.right != null) {
-                    stack.push(cur.right);
-                }
-                
-                if (cur.left != null) {
-                    stack.push(cur.left);
-                } 
-                
-                set.add(cur);
-                
-            } else {
-                results.add(cur.val);
-            }
-        }
-        return results;
-    }
+// -------------------------------------------------------
 
 // using two stacks
 public List<Integer> postorderTraversal(TreeNode root) {
