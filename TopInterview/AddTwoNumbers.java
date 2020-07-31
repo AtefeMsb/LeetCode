@@ -25,7 +25,7 @@ public class AddTwoNumbers {
             if (l2 != null) { l2 = l2.next; }
         }
         
-        // if both lists were exhausted but still some carry left
+        // if both lists were exhausted but still `some carry left
         if (carry != 0) {
             node.next = new ListNode(carry);
             node = node.next;
