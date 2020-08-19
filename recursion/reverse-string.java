@@ -1,26 +1,26 @@
 class Solution {
     
     /*
-    Time complexity : O(N) time to perform N/2N/2 swaps.
-    Space complexity : O(N) to keep the recursion stack.
+    Time complexity : O(N) time to perform N/2 swaps.
+    Space complexity : O(N) it is an inplace solution but not constant space because of recursion stack.
     */
     public void reverseString(char[] s) {
-        helper(s, 0, s.length - 1);
+        helper(0, s.length - 1, s);
     }
     
-    private void helper(char[] s, int low, int high) {
+    private void helper(int start, int end, char[] s) {
         // base case
-        if (low >= high) {
+        if (start >= end) {
             return;
         }
         
         // swap low and high
-        char temp = s[high];
-        s[high] = s[low];
-        s[low] = temp;
+        char temp = s[end];
+        s[end] = s[start];
+        s[start] = temp;
         
         // recurrence relation
-        helper(s, low + 1, high - 1);
+        helper(start + 1, end - 1, s);
         
     } 
 }
