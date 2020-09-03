@@ -1,3 +1,5 @@
+// Time complexity : O(n)O(n)
+// Space complexity : O(n)O(n)
 // using map
 class Solution {
     public boolean containsDuplicate(int[] nums) {
