@@ -1,42 +1,41 @@
-// O(N ^ 2) - because of nested loops
-/*
 class Solution {
     public void duplicateZeros(int[] arr) {
         
-        int n = arr.length;
-        for (int i = 0; i < n ; i++) {
-            if (i != n - 1 && arr[i] == 0) {
-                for (int j = n - 1; j > i ; j--) {
-                    // shift to the right
-                    arr[j] = arr[j - 1];
+        int dupsCount = 0;
+        int length = arr.length - 1;
+       
+        // count number of zero elements
+        for (int i = 0; i <= length - dupsCount; i++) {
+            
+            if (arr[i] == 0) {
+                
+                //  EDGE CASE for counting zero: if zero be the last element
+                //  and there is no space to duplicate it
+                if (i == length - dupsCount) {
+                    // For this zero we just copy it without duplication.
+                    arr[length] = 0;
+                    length--;
+                    break;
                 }
                 
-                i++; // skip the current zero
-                arr[i] = 0; // zero the next item
+                dupsCount++;
             }
         }
-    }
-}
-*/
-
-// O(N)
-class Solution {
-   public void duplicateZeros(int[] arr) {
-        int countZero = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 0) countZero++;
-        }
-        int len = arr.length + countZero;
-        //We just need O(1) space if we scan from back
-        //i point to the original array, j point to the new location
-        for (int i = arr.length - 1, j = len - 1; i < j; i--, j--) {
-            if (arr[i] != 0) {
-                if (j < arr.length) arr[j] = arr[i];
+        
+        // Start backwards from the last element which would be part of new array.
+        int last = length - dupsCount;
+        
+        // Copy zero twice, and non zero once.
+        for (int j = last; j >= 0; j--) {
+            if (arr[j] == 0) {
+                arr[j + dupsCount] = 0;
+                dupsCount--;
+                arr[j + dupsCount] = 0;
+                
             } else {
-                if (j < arr.length) arr[j] = arr[i];
-                j--;
-                if (j < arr.length) arr[j] = arr[i]; //copy twice when hit '0'
+                arr[j + dupsCount] = arr[j];
             }
         }
+        
     }
 }
