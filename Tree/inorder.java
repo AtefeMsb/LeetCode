@@ -1,7 +1,7 @@
     // iterative
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack();
+        Queue<TreeNode> stack = new ArrayDeque();
         
         TreeNode cur = root;
         

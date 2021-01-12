@@ -1,38 +1,49 @@
-// Iterative
-public List<Integer> preorderTraversal(TreeNode root) {
-    List<Integer> prelist = new ArrayList<>();
-    Stack<TreeNode> stack = new Stack();
-
-    if (root != null) {
+// Iterative - using stack
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        
+        List<Integer> output = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        
+        if (root == null) return output;
+        
         stack.push(root);
-    }
-
-    TreeNode cur;
-    while (!stack.isEmpty()) {
-        cur = stack.pop();
-        prelist.add(cur.val);
-        if (cur.right != null) {
-            stack.push(cur.right);
+        while (!stack.isEmpty()) {
+            
+            TreeNode node = stack.pop();
+            output.add(node.val);
+            
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            
         }
-        if (cur.left != null) {
-            stack.push(cur.left);
-        }
+        return output;
+        
     }
-    return prelist;
 }
+
+// Recursive
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        
+        List<Integer> output = new ArrayList<>();
+        dfsPreorder(root, output);
+        return output;        
+    }
     
-// recursive
-private void preorderTraversal(TreeNode root, List result) {
-    if (root == null) {
-        return;
+    private void dfsPreorder(TreeNode root, List output) {
+        
+        if (root == null) {
+            return;
+        }
+        
+        output.add(root.val);
+        dfsPreorder(root.left, output);
+        dfsPreorder(root.right, output);
     }
-    result.add(root.val);
-    preorderTraversal(root.left, result);
-    preorderTraversal(root.right, result);
-
-}
-public List<Integer> preorderTraversal(TreeNode root) {
-    List<Integer> result = new ArrayList<>();
-    preorderTraversal(root, result);
-    return result;
 }

@@ -9,7 +9,7 @@
  *     }
  * }
  */
- // TWO POINTER
+ // TWO POINTER - Floyd's tortoise and hare - Floyd's cycle-finding algorithm
 public class Solution {
     public boolean hasCycle(ListNode head) {
         
