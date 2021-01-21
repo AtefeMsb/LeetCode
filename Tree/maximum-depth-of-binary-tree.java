@@ -1,4 +1,4 @@
- // bfs
+ // BFS
  public int maxDepth(TreeNode root) {
         
         Queue<TreeNode> queue = new LinkedList<>();
@@ -28,7 +28,7 @@
     
 //-----------------------------------------------------------------------------------------------------
 
-    // recursive - "Bottom-up" Solution
+    // recursive - "Bottom-up" Solution - DFS - Movie theatre analogy
     public int maxDepth(TreeNode root) {
         
         if (root == null) {
