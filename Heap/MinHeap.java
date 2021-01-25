@@ -75,7 +75,7 @@ public class MinHeap {
         }
 
         index = smallerChildIndex;
-        
+
         }
     }
 
