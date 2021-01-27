@@ -42,7 +42,7 @@ class MyHDesignHashSetashSet {
     
     /** Returns true if this set contains the specified element */
     public boolean contains(int key) {
-         int index = hash(key);
+        int index = hash(key);
         List<Integer> childList = parentList.get(index);
         return childList != null && childList.contains(key);
     }
