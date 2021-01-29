@@ -5,7 +5,6 @@ class TrieNode {
     public Map<Character, TrieNode> children;
     public boolean isCompleteWord;
     
-    /** Initialize your data structure here. */
     public TrieNode() {
         children = new HashMap<>();
         isCompleteWord = false;
@@ -15,7 +14,6 @@ class Trie {
 
     public TrieNode root;
     
-    /** Initialize your data structure here. */
     public Trie() {
         root = new TrieNode();
     }
