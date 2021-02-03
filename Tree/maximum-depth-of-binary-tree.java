@@ -40,6 +40,15 @@
         return Math.max(leftMax , rightMax) + 1;
           
     }
+
+
+/// OR
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = maxDepth(root.left) + 1;
+        int rightDepth = maxDepth(root.right) + 1;
+        return Math.max(leftDepth, rightDepth);
+    }
     
 //-----------------------------------------------------------------------------------------------------
 
@@ -60,6 +69,7 @@
         if (root == null) {
             return;
         }
+        // leaf
         if (root.left == null && root.right == null) {
             answer = Math.max(answer, depth);
         }

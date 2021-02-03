@@ -83,6 +83,7 @@
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         q.add(root);
+        
         while (!q.isEmpty()) {
             TreeNode t1 = q.poll();
             TreeNode t2 = q.poll();
