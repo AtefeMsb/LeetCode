@@ -1,4 +1,6 @@
+// using BFS to traverse
 public class Codec {
+
     public String serialize(TreeNode root) {
         if (root == null) return "";
         Queue<TreeNode> queue = new LinkedList<>();
