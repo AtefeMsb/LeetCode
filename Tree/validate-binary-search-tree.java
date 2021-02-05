@@ -19,30 +19,51 @@
     // -------------------------------------------------------------
     
     // iterative - inorder
-    public boolean isValidBST(TreeNode root) {
-        
-        Stack<TreeNode> stack = new Stack();
-        double inorder = - Double.MAX_VALUE;
-        
-        TreeNode cur = root;
-        
-        while (cur != null || !stack.isEmpty()) {
-            // travel to left
-            while (cur != null) {
-                stack.push(cur);
-                cur = cur.left;
+    class Solution {
+        public boolean isValidBST(TreeNode root) {
+            Deque<TreeNode> stack = new ArrayDeque<>();
+            Integer prev = null;
+    
+            while (!stack.isEmpty() || root != null) {
+                while (root != null) {
+                    stack.push(root);
+                    root = root.left;
+                }
+                root = stack.pop();
+                // If next element in inorder traversal
+                // is smaller than the previous one
+                // that's not BST.
+                if (prev != null && root.val <= prev) {
+                    return false;
+                }
+                prev = root.val;
+                root = root.right;
             }
-            
-            cur = stack.pop();
-           // If next element in inorder traversal
-           // is smaller than the previous one
-           // that's not BST.
-           if (cur.val <= inorder) return false;
-            
-            // update the previous value
-           inorder = cur.val;
-           cur = cur.right;
+            return true;
         }
- 
-        return true;
     }
+///////////////////////////////////////////////////////////////////
+// recursive - inorder
+class Solution2 {
+    // We use Integer instead of int as it supports a null value.
+    private Integer prev;
+
+    public boolean isValidBST(TreeNode root) {
+        prev = null;
+        return inorder(root);
+    }
+
+    private boolean inorder(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!inorder(root.left)) {
+            return false;
+        }
+        if (prev != null && root.val <= prev) {
+            return false;
+        }
+        prev = root.val;
+        return inorder(root.right);
+    }
+}

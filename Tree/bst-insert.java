@@ -37,6 +37,8 @@
     // recursive
     public TreeNode insertIntoBST(TreeNode root, int val) {
         // return a new node if root is null
+        // this happens when 1. the original tree is empty
+        // 2. when we found the location and want to create the new node
         if (root == null) {
             return new TreeNode(val);   
         }

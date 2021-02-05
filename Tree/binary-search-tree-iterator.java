@@ -1,4 +1,4 @@
-/*
+
 // Approach 1: Flattening the BST
 class BSTIterator {
 
@@ -43,7 +43,7 @@ class BSTIterator {
     }
 }
 
-*/
+///////////////////////////////////////////////////////////////////////
 
 // check the leetcode solution
 // Approach 2: Controlled Recursion
