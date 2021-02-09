@@ -70,3 +70,28 @@ class Node {    // the structure for the tree node
  * KthLargest obj = new KthLargest(k, nums);
  * int param_1 = obj.add(val);
  */
+
+ //////////////////////////////////////////////////////////////////////
+ // min heap solution
+ class KthLargest2 {
+
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    int k;
+    
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        for (int num : nums) {
+            minHeap.add(num);
+        }
+    }
+    
+    public int add(int val) {
+        minHeap.add(val);
+        
+        while (minHeap.size() > k) {
+            minHeap.poll();
+        }
+        
+        return minHeap.peek();
+    }
+}
