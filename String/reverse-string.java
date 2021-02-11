@@ -1,3 +1,4 @@
+// two pointers
 class Solution {
     public void reverseString(char[] s) {
         
@@ -7,15 +8,13 @@ class Solution {
         int high = len - 1;
         
         while (low < high) {
-            
+            // swap the two character
             char tmp = s[low];
             s[low] = s[high];
             s[high] = tmp;
             
             low++;
             high--;
-        }
-        
-        
+        }  
     }
 }
