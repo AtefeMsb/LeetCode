@@ -18,7 +18,7 @@ public class Solution {
         }
         return null;   
     }
-    
+    // distance (head and cycle_start) == distance (intersection and cycle_start)
     public ListNode detectCycle(ListNode head) {
         
         ListNode intersect = getIntersect(head);
