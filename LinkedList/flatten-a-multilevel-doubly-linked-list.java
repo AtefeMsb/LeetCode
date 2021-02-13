@@ -38,7 +38,7 @@ class Solution {
             if (cur.next != null ) {
                 cur.next.prev = temp;
             }
-            // Connect cur with cur.child, and remove cur.child
+            // Connect cur with cur.child, and remove cur.child pointer by setting it to null
             cur.next = cur.child; 
             cur.child.prev = cur;
             cur.child = null;

@@ -4,6 +4,7 @@ class Solution {
         ListNode fast = head;
         
         // slow will stop at "middle of the loop + 1"
+        // when fast reaches the end of linkedlist, slow will be on the middle element
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
