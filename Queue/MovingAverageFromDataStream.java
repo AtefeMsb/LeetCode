@@ -30,7 +30,7 @@ class MovingAverage {
         
     }
 }
-
+//////////////////////////////////////////////////////////////////
 /**
 second way: keeping the size of queue less or equal the size
 keeping the updated total sum
@@ -57,5 +57,32 @@ class MovingAverage2 {
 
     return windowSum * 1.0 / Math.min(size, count);\
         
+    }
+}
+//////////////////////////////////////////////////////////
+// similar to the first way
+class MovingAverage {
+
+    int size;
+    double sum;
+    Deque<Integer> queue;
+    
+    /** Initialize your data structure here. */
+    public MovingAverage(int size) {
+        this.size = size;
+        this.sum = 0;
+        this.queue = new ArrayDeque<>();
+    }
+    
+    public double next(int val) {
+        queue.offer(val);
+        sum += val;
+        
+        if (queue.size() > size) {
+            int removedVal = queue.poll();
+            sum -= removedVal;
+        }
+        
+        return sum / queue.size();
     }
 }
