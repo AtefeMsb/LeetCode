@@ -7,10 +7,10 @@ class MinStack {
     private Stack<Integer> minStack = new Stack<Integer>();
     
     public void push(int x) {
-        // store current min value into minStack
+        stack.push(x);
+        // store current min value into minStack - if the value is repeated, add it again
         if (minStack.isEmpty() || x <= minStack.peek())
             minStack.push(x);
-        stack.push(x);
     }
 
     public void pop() {
@@ -29,7 +29,7 @@ class MinStack {
     }
 }
 
-
+/////////////////////////////////////////////////////////////////
 // ONE STACK - pushing the second min always before the new min
 
 class MinStack {
@@ -60,7 +60,7 @@ class MinStack {
     }
 }
 
-
+///////////////////////////////////////////////////////////////////
 // LINKEDLIST
 class MinStack {
     private Node head;
@@ -98,5 +98,42 @@ class MinStack {
             this.min = min;
             this.next = next;
         }
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////
+// Stack of Value/ Minimum Pairs
+class MinStack {
+    
+    private Stack<int[]> stack = new Stack<>();
+    
+    public MinStack() { }
+    
+    
+    public void push(int x) {
+        
+        /* If the stack is empty, then the min value
+         * must just be the first value we add. */
+        if (stack.isEmpty()) {
+            stack.push(new int[]{x, x});
+            return;
+        }
+        
+        int currentMin = stack.peek()[1];
+        stack.push(new int[]{x, Math.min(x, currentMin)});
+    }
+    
+    
+    public void pop() {
+        stack.pop();
+    }
+    
+    
+    public int top() {
+        return stack.peek()[0];
+    }
+    
+    
+    public int getMin() {
+        return stack.peek()[1];
     }
 }
