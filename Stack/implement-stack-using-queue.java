@@ -54,10 +54,10 @@ class MyStack {
     
     public void push(int x) {
         q.offer(x);
-        int n = q.size();
-        while (n > 1) {
+        int size = q.size();
+        while (size > 1) {
             q.offer(q.poll());
-            n--;
+            size--;
         }
     }
     

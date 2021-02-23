@@ -1,3 +1,10 @@
+/**
+ * all the pusheses happens in pushStack
+ * for pop, we only pop from popStack, because its top always hold the oldest element, but
+ * if popstack is empty, need to push everything from pushstack into popstack first and then pop the top of popstack
+ * this way pop and peek can always from popStack and push always happens from pushStack
+ * Time Complexity: Push - O(1) per operation, Pop - Amortized O(1) per operation.
+ */
 class MyQueue {
 
     Stack<Integer> pushStack;

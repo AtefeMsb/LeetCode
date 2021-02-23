@@ -1,43 +1,55 @@
-public class Solution {
+class Solution {
     public String decodeString(String s) {
         
-        String res = "";
-        Stack<Integer> countStack = new Stack();
-        Stack<String> resStack = new Stack();
-        int idx = 0;
-        
-        while (idx < s.length()) {
+        Deque<Character> stack = new ArrayDeque<>();
+                
+        for (int index = 0; index < s.length(); index++) {
             
-            // if char is digit
-            if (Character.isDigit(s.charAt(idx))) {
-                int count = 0;
-                while (Character.isDigit(s.charAt(idx))) {
-                    count = 10 * count + (s.charAt(idx) - '0');
-                    idx++;
+            if (s.charAt(index) != ']') {
+                
+                stack.push(s.charAt(index));
+               
+                // we hit the close ']'
+            } else {
+                // extracting all the characters from inside []
+                List<Character> reversedChars = new ArrayList<>();
+                
+                while (stack.peek() != '[') {
+                    reversedChars.add(stack.pop());
                 }
-                countStack.push(count);
-            }   // if char is [
-            else if (s.charAt(idx) == '[') {
-                resStack.push(res);
-                res = "";
-                idx++;
-            }   // if charis ]
-            else if (s.charAt(idx) == ']') {
-                StringBuilder temp = new StringBuilder (resStack.pop());
-                int repeatTimes = countStack.pop();
-                for (int i = 0; i < repeatTimes; i++) {
-                    temp.append(res);
+                
+                // pop one open bracker
+                stack.pop();
+                
+                // extract the digits
+                int acc = 0;
+                int base = 1;
+                while (!stack.isEmpty() && Character.isDigit(stack.peek())) {
+                    acc = acc + (stack.pop() - '0') * base;
+                    base = base * 10;
                 }
-                res = temp.toString();
-                idx++;
-            }   // if char is alphabet
-            else {
-                res += s.charAt(idx);
-                idx++;
+                
+                List<Character> repeatedReversedChars = new ArrayList<>();
+                // construct the string
+                for (int i = 0; i < acc; i++) {
+                    repeatedReversedChars.addAll(reversedChars);
+                }
+                
+                // push the characters back to the stack from the end
+                for (int i = repeatedReversedChars.size() - 1; i >= 0; i--) {
+                    stack.push(repeatedReversedChars.get(i));
+                }
+    
             }
+        }
+        
+        StringBuilder output = new StringBuilder();
+        while (!stack.isEmpty()) {
+            output.insert(0, stack.pop());
             
         }
         
-        return res;
+        return output.toString();
+        
     }
 }
