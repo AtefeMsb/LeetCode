@@ -4,21 +4,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class CanSum {
-    
     /**
-     * questions wether is possible to generate the target from the list of numbers
+     * questions whether is possible to generate the target from the list of numbers
      * it is okay to use any of the numbers multiple times
      * @param targetSum(int): target value - numbers(List): list of non-negative numbers 
      * @return boolean: wether or not is possible to generate targetSum from the list
      */
 
+public class CanSum {
      /**
-      *  CANSUM NAIVE IMPLEMENATION
+      *  CAN SUM NAIVE IMPLEMENATION
+
       * m = target sum
       * n = array length
-      * Time Complexity for memoizaion: O(n ^ m)
-      * Space Complexity for memoizaion: O(m)
+      * Time Complexity: O(n ^ m)
+      * Space Complexity: O(m)
       */
     public static boolean sumNaive(int targetSum, List<Integer> numbers) {
         // base case
@@ -40,12 +40,13 @@ public class CanSum {
 
 
       /**
-      * CANSUM NAIVE DYNAMIC IMPLEMENATION
+      * CAN SUM DYNAMIC IMPLEMENATION
       * USING MEMOIZATION
+
       * m = target sum
       * n = array length
-      * Time Complexity for memoizaion: O(m * n)
-      * Space Complexity for memoizaion: O(m)
+      * Time Complexity: O(m * n)
+      * Space Complexity: O(m)
       */
 
     public static boolean sum(int targetSum, List<Integer> numbers) {
@@ -66,7 +67,7 @@ public class CanSum {
 
         for (int num : numbers) {
             int remainder = targetSum - num;
-            if (sum(remainder, numbers) == true) {
+            if (sumMemoization(remainder, numbers, memo) == true) {
                 memo.put(targetSum, true);
                 return true;
             }             
