@@ -40,7 +40,7 @@ public class CanConstruct {
     }
 
     /**
-     * CAN CONSTRUCT DYNAMIC IMPLEMENATION
+    * CAN CONSTRUCT DYNAMIC IMPLEMENATION
     * USING MEMOIZATION
      
      * m = target.length
