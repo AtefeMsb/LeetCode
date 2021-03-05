@@ -37,7 +37,7 @@ public class CanSum {
         return false; 
 
     }
-
+    // ===============================================================================================
 
       /**
       * CAN SUM DYNAMIC IMPLEMENATION
@@ -76,11 +76,48 @@ public class CanSum {
         memo.put(targetSum, false);
         return false; 
     }
+
+    // ===============================================================================================
+      /**
+      * CAN SUM DYNAMIC IMPLEMENATION
+      * USING TABULATUION
+
+      * m = target sum
+      * n = array length
+      * Time Complexity: O(m * n)
+      * Space Complexity: O(m)
+      */
+    public static boolean sumTabulation(int targetSum, List<Integer> numbers) {
+
+        boolean[] table = new boolean[targetSum + 1];
+        // set all the elements of table to false
+        for (int i = 0; i < table.length; i++) {
+            table[i] = false;
+        }
+
+        // base case - targetSum of zero is always true, it always possible to make
+        table[0] = true;
+
+        // for each item in table
+        for (int i = 0; i < table.length; i++) {
+            for (int num : numbers) {
+                // if item in table is true and] num spaces ahead from the table[i] is a valid space
+                if (i + num <= targetSum && table[i] == true) {
+                    table[i + num] = true;
+                }
+
+            }
+        }
+
+        return table[targetSum];
+    }
+
+    // ===============================================================================================
     public static void main(String[] args) {
-        System.out.println(sum(7, Arrays.asList(2, 3)));
-        System.out.println(sum(7, Arrays.asList(5, 3, 4, 7)));
-        System.out.println(sum(7, Arrays.asList(2, 4)));
-        System.out.println(sum(8, Arrays.asList(2, 3, 5)));
-        System.out.println(sum(300, Arrays.asList(7, 14)));
+        System.out.println(sumTabulation(7, Arrays.asList(2, 3)));
+        System.out.println(sumTabulation(7, Arrays.asList(5, 3, 4, 7)));
+        System.out.println(sumTabulation(7, Arrays.asList(2, 4)));
+        System.out.println(sumTabulation(8, Arrays.asList(2, 3, 5)));
+        System.out.println(sumTabulation(300, Arrays.asList(7, 14)));
     }
 }

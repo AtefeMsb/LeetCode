@@ -1,4 +1,12 @@
-This is git repository is the implementation of all the problem solved in the free code camp course on dynamic programming.
+This is git repository contains the implementation of all the problem solved in the free code camp course on dynamic programming in Java.
+
+[The Course Video](https://www.youtube.com/watch?v=oBt53YbR9Kk&t=14181s&ab_channel=freeCodeCamp.org)
+All the problems are solved by 3 technique:
+
+A. Naive Recursive 
+B. Dynamic Programming Implementation Using Memoization
+C. Dynamic Programming Implementation Using Tabulation
+
 
 List of problems:
 

@@ -38,7 +38,7 @@ public class CanConstruct {
 
         return false;
     }
-
+    // ===============================================================================================
     /**
     * CAN CONSTRUCT DYNAMIC IMPLEMENATION
     * USING MEMOIZATION
@@ -76,10 +76,50 @@ public class CanConstruct {
         memo.put(target, false);
         return false;
     }
+    // ===============================================================================================
+    /**
+    * CAN CONSTRUCT DYNAMIC IMPLEMENATION
+    * USING TABULATION
+     
+     * m = target.length
+     * n = wordBank.length
+     * time complexity: O(m * n * m)
+     * space complexity: O(m)
+     */
+
+     public static boolean constructTabulation(String target, List<String> wordBank) {
+
+        boolean[] table = new boolean[target.length() + 1];
+        for (int i = 0; i <= target.length(); i++) {
+            table[i] = false;
+        }
+
+        // base case - empty string can always be constructed
+        table[0] = true;
+
+        for (int i = 0; i < table.length; i++) {
+
+            if (table[i] == true) {
+                for (String word : wordBank) {
+                    // if the word matches the character starting at position i
+                    if (target.substring(i).indexOf(word) == 0) {
+                        table[i + word.length()] = true;
+                    }
+
+                }
+            }
+
+        }
+
+        return table[target.length()];
+     }
+
+    // ===============================================================================================
+
     public static void main(String[] args) {
-        System.out.println(construct("abcdef", Arrays.asList("ab", "abc", "cd", "def", "abcd")));
-        System.out.println(construct("skateboard", Arrays.asList("bo", "rd", "cd", "ate", "t", "ska", "sk", "boar")));
-        System.out.println(construct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",
+        System.out.println(constructTabulation("abcdef", Arrays.asList("ab", "abc", "cd", "def", "abcd")));
+        System.out.println(constructTabulation("skateboard", Arrays.asList("bo", "rd", "cd", "ate", "t", "ska", "sk", "boar")));
+        System.out.println(constructTabulation("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",
                             Arrays.asList("e", "ee", "eee", "eeee", "eeeee", "eeeeee")));
     }
     

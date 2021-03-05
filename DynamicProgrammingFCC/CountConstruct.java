@@ -39,6 +39,7 @@ public class CountConstruct {
             return totalCount;
         }
 
+    // ===============================================================================================
     /**
     * COUNT CONSTRUCT DYNAMIC IMPLEMENATION
     * USING MEMOIZATION
@@ -71,16 +72,46 @@ public class CountConstruct {
             memo.put(target, totalCount);
             return totalCount;
         }
+    // ===============================================================================================
+    /**
+    * COUNT CONSTRUCT DYNAMIC IMPLEMENATION
+    * USING TABULATION
+     
+     * m = target.length
+     * n = wordBank.length
+     * time complexity: O(n * (m ^ 2))
+     * space complexity: O(m)
+     */
 
-        
+    public static int countTabulation(String target, List<String> wordBank) {
+        int[] table = new int[target.length() + 1];
+        for (int i = 0; i < table.length; i++) {
+            table[i] = 0;
+        }
+        table[0] = 1;
 
-    
+        for (int i = 0; i < table.length; i++) {
+            for (String word : wordBank) {
+
+                // if the word matches the character starting at position i
+                if (target.substring(i).indexOf(word) == 0) {
+                    table[i + word.length()] += table[i];
+
+                }
+
+            }
+            
+        }
+
+        return table[target.length()];
+    }
+    // ===============================================================================================
     public static void main(String[] args) {
 
-        System.out.println(count("purple", Arrays.asList("purp", "le", "e", "purpl")));
-        System.out.println(count("abcdef", Arrays.asList("ab", "abc", "cd", "def", "abcd")));
-        System.out.println(count("skateboard", Arrays.asList("bo", "rd", "cd", "ate", "t", "ska", "sk", "boar")));
-        System.out.println(count("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",
+        System.out.println(countTabulation("purple", Arrays.asList("purp", "le", "e", "purpl")));
+        System.out.println(countTabulation("abcdef", Arrays.asList("ab", "abc", "cd", "def", "abcd")));
+        System.out.println(countTabulation("skateboard", Arrays.asList("bo", "rd", "cd", "ate", "t", "ska", "sk", "boar")));
+        System.out.println(countTabulation("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef",
                             Arrays.asList("e", "ee", "eee", "eeee", "eeeee", "eeeeee")));
     }
 }
