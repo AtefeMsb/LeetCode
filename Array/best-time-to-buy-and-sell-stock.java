@@ -1,6 +1,6 @@
 /*
 update min (price of buy) in each iteration if current value is less than previous min value
-ELSE calculate profit for this day and copare it with current profit and update the profit
+ELSE calculate profit for this day and compare it with current profit and update the profit
 */
 class Solution {
     public int maxProfit(int[] prices) {
