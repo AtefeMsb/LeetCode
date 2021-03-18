@@ -3,7 +3,8 @@ package TwoPointers;
 class Solution {
     public void moveZeroes(int[] nums) {
         
-        // a pointer to point the location when non-zero should be inserted
+        // a pointer to point the location when non-zero should be inserted 
+        // lastNonZeroFoundAt
         int index = 0;
         
         for (int num : nums) {

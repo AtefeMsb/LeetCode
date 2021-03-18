@@ -1,16 +1,23 @@
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
- // TWO POINTER - Floyd's tortoise and hare - Floyd's cycle-finding algorithm
-public class Solution {
+package LinkedList;
+
+// SOLUTION 1: using a HashSet
+public class Solution1 {
+    public boolean hasCycle(ListNode head) {
+        Set<ListNode> nodesSeen = new HashSet<>();
+        while (head != null) {
+            if (nodesSeen.contains(head)) {
+                return true;
+            }
+            nodesSeen.add(head);
+            head = head.next;
+        }
+        return false;
+    }
+}
+// TWO POINTER - Floyd's tortoise and hare - Floyd's cycle-finding algorithm
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+public class Solution2 {
     public boolean hasCycle(ListNode head) {
         
         if (head == null || head.next == null) {
@@ -32,7 +39,8 @@ public class Solution {
     }
 }
 ///////////////////////////////////////////////////
-public class Solution {
+// TWO POINTER - diffrent way
+public class Solution3 {
     public boolean hasCycle(ListNode head) {
         if (head == null) return false;
         
