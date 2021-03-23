@@ -2,28 +2,27 @@ class Solution {
     public String longestCommonPrefix(String[] strs) {
         
         StringBuilder sb = new StringBuilder();
-        if (strs == null || strs.length == 0) {
+        if (strs.length == 0 || strs == null) {
             return sb.toString();
         }
         
-        int index = 0;
-        // compare characeter at index of first string with all other strings character at the same index
-        for (char c : strs[0].toCharArray()) {
-            // strings after first string
-            for (int i = 1; i < strs.length; i++) {
+        // check each character of the first string to the all other strings
+        for (int i = 0; i < strs[0].length(); i++) {
+            for (int j = 1; j < strs.length; j++) {
+                
                 // check
                 // 1: index is not out of bound for any of the strings
-                // 2: character is the same for every string
-                if (index >= strs[i].length() || c != strs[i].charAt(index)) {
+                // 2: character is the same for every string 
+                if (i >= strs[j].length() || strs[0].charAt(i) != strs[j].charAt(i)) {
                     return sb.toString();
-                }
+                }    
             }
-            // if index character was equal in all the strings
-            sb.append(c);
-            // move to the next character
-            index++;
+            
+            // if index was equal in all strings, add to the list of commons
+            sb.append(strs[0].charAt(i));
         }
-           
+        
+ 
         return sb.toString();
     }
 }
