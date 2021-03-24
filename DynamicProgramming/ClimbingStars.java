@@ -1,5 +1,9 @@
 package DynamicProgramming;
-
+/**
+ * solution 1 : dynamic programming - tabulation
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
 public class ClimbingStars {
     public int climbStairs(int n) {
         if (n == 1) {
@@ -12,5 +16,35 @@ public class ClimbingStars {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
         return dp[n];
+    }
+}
+//---------------------------------------
+/**
+ * solution 2 : dynamic programming - memoization
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
+class Solution2 {
+    public int climbStairs(int n) {
+        return memoization(0, n, new HashMap<>());
+    }
+    
+    private int memoization(int i, int n, HashMap<Integer, Integer> memo) {
+        
+        if (memo.containsKey(i)) {
+            return memo.get(i);
+        }
+        
+        if (i > n) {
+             return 0;
+         }
+        
+        if (i == n) {
+            return 1;
+        }
+        
+        memo.put(i, memoization(i + 1, n, memo) + memoization(i + 2, n, memo));
+                
+        return memo.get(i);
     }
 }
