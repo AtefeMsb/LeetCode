@@ -78,7 +78,7 @@
  
     }
     //------------------------------------------------------------------------------------------------------
-        // iterative
+        // iterative BFS
     public boolean isSymmetric(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
