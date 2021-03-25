@@ -2,6 +2,8 @@
 public class Codec {
 
     public String serialize(TreeNode root) {
+
+        // null tree -> empty string
         if (root == null) return "";
         Queue<TreeNode> queue = new LinkedList<>();
         StringBuilder tree = new StringBuilder();
@@ -26,6 +28,7 @@ public class Codec {
 
     public TreeNode deserialize(String data) {
         
+        // empty string -> null tree
         if (data == "") return null;
         Queue<TreeNode> queue = new LinkedList<>();
         String[] values = data.split(",");
@@ -37,14 +40,14 @@ public class Codec {
             
             TreeNode parent = queue.poll();
             
-            // i
+            // i - left child
             if (!values[i].equals("null")) {
                 TreeNode left = new TreeNode(Integer.parseInt(values[i]));
                 parent.left = left;
                 queue.add(left);
             }
             
-            // i + 1
+            // i + 1 - right child
             if (!values[++i].equals("null")) {
                 TreeNode right = new TreeNode(Integer.parseInt(values[i]));
                 parent.right = right;

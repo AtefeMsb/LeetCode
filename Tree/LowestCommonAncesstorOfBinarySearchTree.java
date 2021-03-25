@@ -1,23 +1,33 @@
 package Tree;
 
-// recursive
+// in this question we are looking for spilit point
+
+/**
+ * recursive
+ * time: O(n)
+ * space: O(n) recursion stack
+ */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        
-        // if p and q both in left subtree
+        // both p and q less than root
         if (p.val < root.val && q.val < root.val) {
             return lowestCommonAncestor(root.left, p, q);
-        // if p and q both in right subtree
-        } else if (p.val > root.val && q.val > root.val) {
-            return lowestCommonAncestor(root.right, p, q);
-        } else {
-        // we have found the split point or the LCA node
-            return root;
         }
+        // both p and q more than root
+        if (p.val > root.val && q.val > root.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        // We have found the split point, i.e. the LCA node
+        return root;
+        
     }
 }
-///////////////////////////////////////////////////
-// iterative
+// -------------------------------------------------------- 
+/**
+ * iterative
+ * time: O(n)
+ * space: O(1)
+ */
 class Solution2 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
