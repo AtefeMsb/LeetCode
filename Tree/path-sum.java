@@ -8,7 +8,7 @@
         // one stack to keep track of nodes
         Stack<TreeNode> nodes = new Stack();
         // one stack to keep (sum -  sum of nodes val so far) for each node
-        Stack<Integer> sums= new Stack();
+        Stack<Integer> sums = new Stack();
         
         nodes.push(root);
         sums.push(sum - root.val);
@@ -36,7 +36,7 @@
         return false;
     }
     
-    
+    // ----------------------------------------------------------------------
     // recursive
     // te idea is to ask node children for the path with remaining of the sum so far
     public boolean hasPathSum(TreeNode root, int sum) {
