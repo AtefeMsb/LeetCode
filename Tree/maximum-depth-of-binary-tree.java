@@ -27,22 +27,7 @@
     }
     
 //-----------------------------------------------------------------------------------------------------
-
-    // recursive - "Bottom-up" Solution - DFS - Movie theatre analogy
-    public int maxDepth(TreeNode root) {
-        
-        if (root == null) {
-            return 0;
-        }
-        
-        int leftMax = maxDepth(root.left);
-        int rightMax = maxDepth(root.right);
-        return Math.max(leftMax , rightMax) + 1;
-          
-    }
-
-
-/// OR
+// recursive - "Bottom-up" Solution - DFS - Movie theatre analogy
     public int maxDepth(TreeNode root) {
         if (root == null) return 0;
         int leftDepth = maxDepth(root.left) + 1;
@@ -51,29 +36,34 @@
     }
     
 //-----------------------------------------------------------------------------------------------------
-
-    // recursive - "Top-down" Solution
-    
-     private int answer = 0;
-    
-    // recursive - top to bottom
+// iterative - using 2 stacks
+class Solution {
     public int maxDepth(TreeNode root) {
-        // depth of root is 1
-        maximum_depth(root, 1);
-        return answer;
-    } 
-    
-    	
-    
-    private void maximum_depth(TreeNode root, int depth) {
-        if (root == null) {
-            return;
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        LinkedList<Integer> depths = new LinkedList<>();
+        if (root == null) return 0;
+        
+        stack.push(root);
+        depths.push(1);
+        
+        // total maximum depth
+        int maxDepth = 0;
+     
+        while (!stack.isEmpty()) {
+            
+            TreeNode node = stack.pop();
+            int currentDepth = depths.pop();
+            
+            // add the children, if the node is not null
+            if (node != null) {
+                maxDepth = Math.max(maxDepth, currentDepth);
+                stack.push(node.left);
+                stack.push(node.right);
+                depths.push(currentDepth + 1);
+                depths.push(currentDepth + 1);
+            }
         }
-        // leaf
-        if (root.left == null && root.right == null) {
-            answer = Math.max(answer, depth);
-        }
-        maximum_depth(root.left, depth + 1);
-        maximum_depth(root.right, depth + 1);
+        
+        return maxDepth;
     }
-    
+}

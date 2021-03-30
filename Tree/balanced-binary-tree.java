@@ -58,6 +58,7 @@ class Solution {
 // top down 
 
 class Solution {
+    // calculate maximum depth of binary tree
     public int height(TreeNode root) {
        if (root == null) return 0;
        int left = height(root.left);
