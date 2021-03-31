@@ -1,10 +1,6 @@
 class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         
-        Stack<TreeNode> stack = new Stack();
-        int predecessor = Integer.MIN_VALUE;;
-        TreeNode cur = root;
-        
         // 1- If the node has a right child, go one step right and
         // then left till you can. Return the successor.
         if (p.right != null) {
@@ -17,6 +13,10 @@ class Solution {
         
         // 2- Otherwise, implement iterative inorder traversal.
         // While there are still nodes in the tree or in the stack:
+        Stack<TreeNode> stack = new Stack();
+        int predecessor = Integer.MIN_VALUE;
+        TreeNode cur = root;
+
         while (cur != null || !stack.isEmpty()) {
             while (cur != null) {
                 stack.push(cur);
@@ -51,12 +51,12 @@ If we reach null, our search is over, just return the candidate.
 class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
 
-        TreeNode candidate = null;
+        TreeNode successor = null;
         TreeNode cur = root;
 
         while (cur != null) {
             if (cur.val > p.val) {
-                candidate = cur;
+                successor = cur;
                 cur = cur.left;
             } else {
                 // cur.val <= p.val
@@ -64,6 +64,6 @@ class Solution {
             }
         }
 
-        return candidate;
+        return successor;
     }
 }

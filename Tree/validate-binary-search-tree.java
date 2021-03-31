@@ -1,44 +1,58 @@
 // Recursive
     // https://www.youtube.com/watch?v=yEwSGhSsT0U
+/*
+* Recursive Traversal with Valid Range
+* time complexity: O(n)
+* space complexity: O(n)
+*/
+class Solution {
     public boolean isValidBST(TreeNode root) {
-        return helper(root, null, null);
+        // null indicates there is no minimum and maximum
+        return validate(root, null, null);
     }
     
-    private boolean helper(TreeNode root, Integer lowerBound, Integer upperBound) {
+    private boolean validate(TreeNode root, Integer min, Integer max) {
+        // null has no conflict in bst definition
+        if (root == null) return true;
         
-        if (root == null) {
-            return true;
+        if ((min != null && root.val <= min) || (max != null && root.val >= max)) {
+            return false;
         }
         
-        if (lowerBound != null && root.val <= lowerBound) return false;
-        if (upperBound != null && root.val >= upperBound) return false;
-            
-        return ( helper(root.left, lowerBound, root.val) &&
-                 helper(root.right, root.val , upperBound));
+        return validate(root.left, min, root.val) &&
+               validate(root.right, root.val, max);   
     }
+}
     // -------------------------------------------------------------
-    
+    /**
+     * inorder - 
+     * time complexity: O(n)
+     * space complexity: O(n)
+     */
     // iterative - inorder
     class Solution {
         public boolean isValidBST(TreeNode root) {
-            Deque<TreeNode> stack = new ArrayDeque<>();
+            
+            LinkedList<TreeNode> stack = new LinkedList<>();
+            TreeNode current = root;
             Integer prev = null;
-    
-            while (!stack.isEmpty() || root != null) {
-                while (root != null) {
-                    stack.push(root);
-                    root = root.left;
+            
+            while (current != null || !stack.isEmpty()) {
+                
+                while (current != null) {
+                    stack.push(current);
+                    current = current.left;
                 }
-                root = stack.pop();
-                // If next element in inorder traversal
-                // is smaller than the previous one
-                // that's not BST.
-                if (prev != null && root.val <= prev) {
+                
+                // If next element in inorder traversal is smaller than the previous one that's not BST.
+                current = stack.pop();
+                if (prev != null && current.val <= prev) {
                     return false;
                 }
-                prev = root.val;
-                root = root.right;
+                prev = current.val;
+                current = current.right;
             }
+            
             return true;
         }
     }

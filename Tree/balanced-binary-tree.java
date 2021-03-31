@@ -1,58 +1,34 @@
-// Bottom-up recursion
-
-/*
-Check if the child subtrees are balanced. If they are, use their heights to determine if the current subtree is balanced as well as to calculate the current subtree's height.
-*/
-
-/*
-  We care about 2 things as our recursion goes upwards after bottoming out:
-  - The node's height
-  - Whether its left and right subtrees are balanced
-*/
-
+/**
+ * Bottom-up recursion
+ * time complexity: O(n)
+ * space complexity: O(n)
+ */
+// since the height of a tree is always greater than or equal to 0
+// we use -1 as a flag to indicate if the subtree is not balanced
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        return isBalancedHelper(root).balanced;
+    
+        if (getHeight(root) == -1) {
+            return false;
+        }
+        
+        // else
+        return true;
     }
     
-    // object to save height and isBalanced properties for each node
-    class NodeInfo {
-        public int height;
-        public boolean balanced;
+    private int getHeight(TreeNode node) {
         
-        public NodeInfo(int height, boolean balanced) {
-            this.height = height;
-            this.balanced = balanced;
-        } 
+        if (node == null) return 0;
+        
+        int left = getHeight(node.left);
+        int right = getHeight(node.right);
+        
+        // left or right subtree is unbalanced or cur tree is unbalanced
+        if (left == -1 || right == -1 || Math.abs(left - right) > 1) return -1;
+        
+        // return the actual height
+        return Math.max(left, right) + 1;
     }
-    
-    private NodeInfo isBalancedHelper(TreeNode node) {
-        
-        // Base case, an empty subtree is balanced and has a height of -1 as we define it
-        if (node == null) {
-            return new NodeInfo(-1, true);
-        }
-        
-        // Go deep into the left subtree and get a result back
-        NodeInfo left = isBalancedHelper(node.left);
-        // Left subtree is not balanced. Bubble up failure.
-        if (!left.balanced) {
-            return new NodeInfo(-1, false); 
-        }
-        
-        
-        NodeInfo right = isBalancedHelper(node.right);
-        if (!right.balanced) {
-            return new NodeInfo(-1, false); 
-        }
-        
-        // Use the height obtained from the recursive calls to
-        // determine if the current node is also balanced. 
-        boolean subtreesAreBalanced = Math.abs(left.height - right.height) <= 1;
-        int height = Math.max(left.height, right.height) + 1;
-
-        return new NodeInfo(subtreesAreBalanced, height);
-    }    
 }
 ///////////////////////////////////////////////////////////////
 // top down 
