@@ -9,7 +9,7 @@ class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         
         // create an adjacency list (build the graph)
-        // key: course num  , value: prerequsites num
+        // KEY: course number  , VALUE: the course that depends on it
         Map<Integer, List<Integer>> adjacencyList = new HashMap<>();
         
         // map each course to an empty list
@@ -18,51 +18,53 @@ class Solution {
         }
         
         // add the prerequesites to each course list
+        // destination: pre[0]
+        // source : pre[1]
         for (int[] pre : prerequisites) {
-                adjacencyList.get(pre[0]).add(pre[1]);
+                adjacencyList.get(pre[1]).add(pre[0]);
         }
         
         // print the adjacency list
         System.out.println(Arrays.toString(adjacencyList.entrySet().toArray()));
 
-        // all the courses along the dfs path 
-        Set<Integer> visited = new HashSet<>();
-        
+        // state of each course vertices
+        // 0 means UNVISITED
+        // 1 means VISITING
+        // 2 means VISITED
+        int[] states = new int[numCourses];
+
         // run the dfs for each of courses
         for (int crs = 0; crs < numCourses; crs++) {
-            if (!dfs(crs, adjacencyList, visited)) {
-               return false; 
-            } 
+            if (states[crs] == 0) {
+                if (isCyclic(adjacencyList, states, crs)) {
+                    return false;
+                }
+            }
         }
         
         return true;
     }
     
-    // dfs traversal
-    private boolean dfs(int crs, Map<Integer, List<Integer>> adjacencyList, Set<Integer> visited) {
+    private boolean isCyclic(Map<Integer, List<Integer>> adjacencyList, int[] states, int crs) {
         
-        // base cases
-        // if visited course before, so detected a loop
-        if (visited.contains(crs)) return false;  
-        // prerequits of this list is an empty list, so it can be completed
-        if (adjacencyList.get(crs).isEmpty()) return true;
+        // processing a node in "visiting" state means there is a cycle
+        if (states[crs] == 1) return true;
         
-        visited.add(crs);
+        // make the node state "visiting"
+        states[crs] = 1;
         
-        // run dfs recursively for its prerequist
-        for (int pre : adjacencyList.get(crs)) {
-            if (!dfs(pre, adjacencyList, visited)) {
-                return false;
+        // run dfs recursively for each of its destination
+        for (int dest : adjacencyList.get(crs)) {
+            if (states[dest] != 2) {
+                if (isCyclic(adjacencyList, states, dest)) {
+                 return true;
+                }
             }
         }
         
-        // remove the visited course from visited set
-        visited.remove(crs);
+        // make the node state "visited"
+        states[crs] = 2;
         
-        // since we know this crs can be visited, it has no prerequisit, by empty list
-        adjacencyList.put(crs, new ArrayList<>());
-        
-        return true;
-
-    }
+        return false;
+    } 
 }
