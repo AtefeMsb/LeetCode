@@ -1,6 +1,6 @@
 package Tree;
 
-// in this question we are looking for spilit point
+// in this answer we are looking for spilit point
 
 /**
  * recursive
