@@ -25,3 +25,27 @@ class Solution {
        return prev;
     }
 }
+// ------------------------------
+/**
+ * recursive
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+       return recursive(head, null);
+    }
+    
+    private ListNode recursive(ListNode head, ListNode prev) {
+        // base case - reach the end of the list
+        if (head == null) return prev;
+        
+        // advanve prev and head pointers
+        ListNode next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+        
+        // do the same thing on the new advances prev and head pointers
+        return recursive(head, prev);
+        
+    }
+}
