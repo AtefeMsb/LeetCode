@@ -1,4 +1,4 @@
-package Dfs&Bfs;
+package DfsBfs;
 
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
@@ -12,6 +12,7 @@ class Solution {
     private void dfs(int[][] image, int i, int j, int color, int newColor) {
         
         // base case
+        // if out of boundries or the color is the same as the starting color
         if (i < 0 || i >= image.length || j < 0 || j >= image[i].length || image[i][j] != color) {
             return;
         }
