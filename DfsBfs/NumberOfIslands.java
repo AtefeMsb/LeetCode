@@ -141,7 +141,8 @@ class Solution3 {
           } else if (rank[rootx] < rank[rooty]) {
             parent[rootx] = rooty;
           } else {
-            parent[rooty] = rootx; rank[rootx] += 1;
+            parent[rooty] = rootx;
+            rank[rootx] += 1;
           }
           --count;
         }
