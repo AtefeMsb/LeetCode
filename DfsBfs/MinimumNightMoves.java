@@ -5,7 +5,7 @@ class Solution {
     public int minKnightMoves(int x, int y) {
         
         // optimization 1: Turn our destination from (x,y) -> (abs(x) abs(y)).
-        // vasically only search in the first quadrant, because of symmetry
+        // basically only search in the first quadrant, because of symmetry
         x = Math.abs(x);
         y = Math.abs(y);
        
