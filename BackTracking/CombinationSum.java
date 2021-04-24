@@ -1,44 +1,28 @@
-package BackTracking;
-
-class CombinationSum {
+class Solution {
+    
+    List<List<Integer>> result = new ArrayList<>();
+    
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         
-        List<List<Integer>> result = new ArrayList<>();
-        LinkedList<Integer> current = new LinkedList<Integer>();
-        
-        findCombinations(candidates, target, 0, current, result);
-        
+        backtracking(candidates, target, new LinkedList<Integer>(), 0);
         return result;
     }
     
-    // this function is backtracking. basically is DFS using recursion to find all the combinations
-    private void findCombinations(int[] candidates, int target, int index, LinkedList<Integer> current, List<List<Integer>> result) {
+    private void backtracking(int[] candidates, int remainder, LinkedList<Integer> cur, int start) {
         
-        // got all the number we wanted
-        if (target == 0) {
-            // make a deep copy of the current combination
-            result.add(new ArrayList<Integer>(current));
+        if (remainder == 0) {
+            result.add(new ArrayList<>(cur));
+            return;
+        } else if (remainder < 0) {
             return;
         }
         
-        
-        // exceed the target, no more candidate can solve this because they all are positive
-        if (target < 0) {
-            return;
-        }
-        
-        // this is the matter of taking or not taking a number
-        for (int i = index; i < candidates.length; i++) {
+        // always pick from the current i and the next ones, that is why the backtracking is start with i for the recurse
+        for (int i = start; i < candidates.length; i++) {
             
-            // add the number into the combination
-            current.add(candidates[i]);
-            findCombinations(candidates, target - candidates[i], i , current, result);
-            
-             // backtrack, remove the number from the combination
-            current.removeLast();
-            
-        }
- 
+            cur.add(candidates[i]);
+            backtracking(candidates, remainder - candidates[i], cur, i);
+            cur.removeLast();
+        }   
     }
-    
 }
