@@ -101,7 +101,7 @@ public class CanSum {
         // for each item in table
         for (int i = 0; i < table.length; i++) {
             for (int num : numbers) {
-                // if item in table is true and] num spaces ahead from the table[i] is a valid space
+                // if item in table is true and num spaces ahead from the table[i] is a valid space
                 if (i + num <= targetSum && table[i] == true) {
                     table[i + num] = true;
                 }
