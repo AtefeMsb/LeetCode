@@ -1,4 +1,4 @@
-package Graph;
+rpackage Graph;
 
 class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -51,6 +51,7 @@ class Solution {
     private void dfs(Map<Integer, List<Integer>> adjacencyList, boolean[] visited, LinkedList<Integer> stack, int crs) {
         
         visited[crs] = true;
+        
         for (int dest : adjacencyList.get(crs)) {
             if (visited[dest] != true) {
                 dfs(adjacencyList, visited, stack, dest);
