@@ -14,12 +14,15 @@
 - You need to check people in the order they were added to the search list, so the search list needs to be a queue. Otherwise, you won’t get the shortest path.
 - Once you check someone, make sure you don’t check them again. Otherwise, you might end up in an infinite loop.
 
+# Topological Sort
+- Only exists for DAG(Directed Acyclic Graph)
+- All trees are DAG
+
 # Dijkstra’s algorithm (Single Source Shortest Path)
 - Breadth-first search is used to calculate the shortest path for an unweighted graph.
 - Dijkstra’s algorithm is used to calculate the shortest path for a weighted graph.
 - Dijkstra’s algorithm works when all the weights are POSITIVE.
 - If you have negative weights, use the Bellman-Ford algorithm.
-
 
 
 # Minimum Spanning Tree

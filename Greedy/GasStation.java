@@ -12,23 +12,23 @@ class Solution {
         // if the sum of diffrences of gas and cost, the problem doesn't have solution
         if (totalDif < 0) {
             return -1;
-        } else {
-            // start from starting point of zero with an empty tank
-            int starting = 0;
-            int tank = 0;
-            
-            // try all the starting points to see which one works
-            for (int i = 0; i < gas.length; i++) {
-                tank += gas[i] - cost[i];
-                // at any point if the tank is negative, we change the starting point to
-                // one step after the step that tank was negative and reset the tank to zero
-                if (tank < 0) {
-                    starting = i + 1;
-                    tank = 0;
-                }
-            }
-            
-            return starting;
         }
+        // start from starting point of zero with an empty tank
+        int starting = 0;
+        int tank = 0;
+        
+        // try all the starting points to see which one works
+        for (int i = 0; i < gas.length; i++) {
+            tank += gas[i] - cost[i];
+            // at any point if the tank is negative, we change the starting point to
+            // one step after the step that tank was negative and reset the tank to zero
+            if (tank < 0) {
+                starting = i + 1;
+                tank = 0;
+            }
+        }
+        
+        return starting;
+        
     }
 }
