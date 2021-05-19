@@ -5,15 +5,18 @@ public class Solution {
 
         int sum = 0;
         int result = 0;
-        // key: sum     value: how many times we seen it
+        // key: cumulative sum     value: how many times we seen it
         Map<Integer, Integer> sumFrequency = new HashMap();
         // start by adding sum of zero 
+        // sum of zero has been seen once 
         sumFrequency.put(0, 1);
        
         for (int i = 0; i < nums.length; i++) {
+            // add to the cumulative sum till now
             sum += nums[i];
             
-            // if hashmap contains the diffrence 
+            // if the diffrence between sum till now and value exists in the map
+            // it means that a subarray of sum has been found 
             if (sumFrequency.containsKey(sum - k)) {
                 result += sumFrequency.get(sum - k);
             }
