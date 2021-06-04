@@ -4,7 +4,7 @@ package DynamicProgramming;
  * Time Complexity: O(n)
  * Space Complexity: O(n)
  */
-public class ClimbingStars {
+public class ClimbingStairs {
     public int climbStairs(int n) {
         if (n == 1) {
             return 1;

@@ -80,7 +80,8 @@
     //------------------------------------------------------------------------------------------------------
         // iterative BFS
     public boolean isSymmetric(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
+        // must use LinkedList collection to be able to save NULL values
+        LinkedList<TreeNode> q = new LinkedList<>();
         q.add(root);
         q.add(root);
         
