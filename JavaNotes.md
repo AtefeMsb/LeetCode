@@ -1,5 +1,10 @@
-**1. how to read elements of a map in java:**
-```Map.Entry<Integer, Integer> entry : map.entrySet()```
+**1. how to read key/value elements of a map in java:**
+```
+for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
+    int value = entry.getValue();
+    int key = entruy.getKey();
+}
+```
 
 **2. how to count frequency of elemnt using a map in java:**
 ```
