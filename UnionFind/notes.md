@@ -26,7 +26,8 @@ class DSU {
     }
 
     public boolean union(int x, int y) {
-        int xr = find(x), yr = find(y);
+        int xr = find(x);
+        int yr = find(y);
         if (xr == yr) {
             return false;
         } else if (rank[xr] < rank[yr]) {

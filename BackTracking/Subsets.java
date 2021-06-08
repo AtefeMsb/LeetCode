@@ -2,7 +2,7 @@ package BackTracking;
 
 /*
 backtracking
-constraints: length of the subset
+constraints: LENGTH OF THE SUBSET
 important nort is this solution is orgnized based on the length of the subset
 at first, length 0 subset, then length 1 subset, ... till length nums.length subset
 */
