@@ -1,3 +1,8 @@
+/**
+ * using hashmap
+ * time complexity: O(n)
+ * space complexity: O(n)
+ */
 class Solution {
     public int majorityElement(int[] nums) {
         
@@ -18,5 +23,30 @@ class Solution {
         }
         
         return -1;
+    }
+}
+
+/**
+ *  Boyer-Moore Voting Algorithm
+ * time complexity: O(n)
+ * space complexity: O(1)
+ */
+class Solution {
+    public int majorityElement(int[] nums) {
+        
+        int count = 0;
+        Integer candidate = null;
+        
+        for (int num : nums) {
+            // if count is zero, pick the current as new candidate
+            if (count == 0) {
+                candidate = num;
+            }
+            
+            // if the cur equal the current candidate, add one to count
+            count += (num == candidate) ? 1 : -1;
+        }
+        
+        return candidate; 
     }
 }

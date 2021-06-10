@@ -1,4 +1,7 @@
-
+/**
+ * time complexity: O(n)
+ * Space complexity: O(N). O(N) to keep the output, and O(logN) for the recursion stack.
+ */
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -10,7 +13,7 @@ class Solution {
     
     private TreeNode constructTreeFromArray(int[] nums, int left, int right) {
         
-        // base cass
+        // base case
         if (left > right) {
             return null;
         }
