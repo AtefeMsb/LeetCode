@@ -69,6 +69,7 @@ class MinStack {
         if(head == null) 
             head = new Node(x, x);
         else 
+            // add the new node before the head node and update the head node to the new node
             head = new Node(x, Math.min(x, head.min), head);
     }
 
