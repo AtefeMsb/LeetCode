@@ -1,3 +1,8 @@
+/**
+ * check needle starting from each character in haystack
+ * time: O(n ^ 2)
+ * space: O(1)
+ */
 class Solution {
     public int strStr(String haystack, String needle) {
         
