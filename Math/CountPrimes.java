@@ -1,5 +1,6 @@
 /**
 * Algorithm: Sieve of Eratosthenes
+* Note: prime numbers start from 2
 */
 class Solution {
     public int countPrimes(int n) {
