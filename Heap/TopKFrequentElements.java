@@ -19,7 +19,8 @@ class Solution {
         }
         
         int[] result = new int[k];
-        while (k-- > 0) {
+        while (k > 0) {
+            k--;    // because of zero indexing
             result[k] = minHeap.remove();
         }
         
