@@ -6,24 +6,28 @@ package TwoPointers;
  */
 class Solution {
     public int findDuplicate(int[] nums) {
-        // Find the intersection point of the two runners.
-        int slow = nums[0];
-        int fast = nums[0];
+        
+        // find the intersection
+        int slow = 0;
+        int fast = 0;
         
         do {
             slow = nums[slow];
             fast = nums[nums[fast]];
         } while (slow != fast);
         
-        // Find the "entrance" to the cycle.
-        slow = nums[0];
-        while (slow != fast) {
-            slow = nums[slow];
-            fast = nums[fast];
+        int intersection = slow;
+        
+        // find the begiing of the cycle
+        int p1 = 0;
+        int p2 = intersection;
+        
+        while (p1 != p2) {
+            p1 = nums[p1];
+            p2 = nums[p2];
         }
         
-        return fast;
-        
+        return p1;  
     }
 }
 
