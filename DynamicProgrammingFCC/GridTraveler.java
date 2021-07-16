@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * travel in a grid of m * n from top-left to bottom-right
- * only move "right" and "down"
+ * travel in a grid of m * n from TOP-LEFT to BOTTOM-RIGHT
+ * only moves are "right" and "down"
  * @return how many ways can travel?
  * @param m(int): number of rows - n(int): number of columns
  */
@@ -13,7 +13,7 @@ import java.util.Map;
 public class GridTraveler {
 
 /**
- * FIBONACCI DYNAMIC IMPLEMENTATION
+ * TRAVELER DYNAMIC IMPLEMENTATION
  * USING MEMOIZATION
  * 
  * Time Complexity: O(n * m)
@@ -41,7 +41,7 @@ private static Long travelingMemoiztion(int m, int n, HashMap<String, Long> memo
 
 // ===============================================================================================
 /** 
- * FIBONACCI DYNAMIC IMPLEMENTATION
+ * TRAVELER DYNAMIC IMPLEMENTATION
  * USING TABULATION
  * 
  * Time Complexity: O(n * m)
