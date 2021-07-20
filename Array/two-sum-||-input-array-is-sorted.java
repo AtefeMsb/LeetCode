@@ -1,4 +1,4 @@
-// Your returned answers (both index1 and index2) are not zero-based. --> i + 1
+// NOTE: in the specific, the returned answers (both index1 and index2) are not zero-based. --> i + 1
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
         
