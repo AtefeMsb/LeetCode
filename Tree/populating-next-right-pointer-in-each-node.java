@@ -1,4 +1,7 @@
-  // bfs - iterative
+  /**
+   * bfs - iterative
+   * time: O(n)
+   */
   public Node connect(Node root) {
 
 
