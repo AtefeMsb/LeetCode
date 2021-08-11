@@ -6,26 +6,19 @@
 class Solution {
     public void sortColors(int[] nums) {
         
-        // 1. count the number of 0s, 1s, and 2s
         int[] counts = new int[3];
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) {
-                counts[0]++;
-            } else if (nums[i] == 1) {
-                counts[1]++;
-            } else {
-                counts[2]++;
-            }
+            int key = nums[i];
+            counts[key]++;
         }
-                
-        // 2. rewrite the array using those counts
+        
         int p = 0;
-        for (int c = 0; c < counts.length; c++) {
-            for (int j = 0; j < counts[c]; j++) {
-                nums[p] = c;
+        for (int i = 0; i < counts.length; i++) {
+            for (int j = 0; j < counts[i]; j++) {
+                nums[p] = i;
                 p++;
             }
-        }
+        }    
     }
 }
 
