@@ -62,7 +62,7 @@
         queue.offer(root);
         parents.put(root, null);
         
-        // stop when both p and q were found
+        // stop when both p and q were found (EARLY STOPPING)
         while (!parents.containsKey(p) || !parents.containsKey(q)) {
             
             TreeNode cur = queue.poll();

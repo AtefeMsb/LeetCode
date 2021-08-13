@@ -30,3 +30,34 @@ class Solution {
         return dp[n];
     }
 }
+
+// ---------------------------------------------
+// dynamic programming using memoization
+class Solution {
+    public int numSquares(int n) {
+        return memoization(n, new HashMap<>());
+    }
+    
+    private int memoization(int n, HashMap<Integer, Integer> memo) {
+        
+        // check in memo table
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+        
+        // base case
+        if (n <= 3) return n;
+        
+        int ans = Integer.MAX_VALUE;
+        
+        // check for all the possible squares
+        for (int i = 1; i * i <= n; i++) {
+            ans = Math.min(ans, 1 + memoization(n - (i * i), memo));
+        }
+        
+        // update the memo table
+        memo.put(n, ans);
+        return ans;
+        
+    }
+}
