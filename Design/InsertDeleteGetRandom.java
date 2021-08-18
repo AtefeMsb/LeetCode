@@ -1,3 +1,7 @@
+/**
+ * HashMap: Hashmap provides Insert and Delete in average constant time, although has problems with GetRandom.
+ * Array: Array List has indexes and could provide Insert and GetRandom in average constant time, though has problems with Delete.
+ */
 class RandomizedSet {
     // key: val    value: index
     Map<Integer, Integer> map;
