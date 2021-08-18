@@ -9,7 +9,7 @@ class Solution {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
         
-        // put all the frequencie in maxHeap, beuase we want to start from the highest
+        // put all the frequencie in maxHeap, because we want to start from the highest frequency task
         // and spread it through the cycles, to have a more effiecient use of cpu time
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
         maxHeap.addAll(map.values());
