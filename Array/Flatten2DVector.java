@@ -90,3 +90,50 @@ class Vector2D {
         return outer < vector.length;
     }
 }
+// --------------------------------------------
+/** using stack
+ * 
+ */
+import java.util.NoSuchElementException;
+
+class Vector2D {
+    LinkedList<int[]> stack;
+    int[][] v;
+
+    public Vector2D(int[][] vec) {
+        stack = new LinkedList<>();
+        v = vec;
+        prepareStack();
+    }
+    
+    // put all the int[] in stack but in the reverse order
+    private void prepareStack() {
+        for (int i = v.length - 1; i >= 0; i--) {
+            if(v[i].length == 0){
+                continue;
+            }
+            stack.push(v[i]);  
+        }
+    }
+   
+    
+    public int next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return stack.pop()[0];
+    }
+    
+    public boolean hasNext() {
+        // convert the top list to individual int array (int array with length 1)
+        // IN REVERSE ORDER
+        if (!stack.isEmpty()) {
+            int[] list = stack.pop();
+            for (int i = list.length - 1; i >= 0; i--) {
+                stack.push(new int[] {list[i]});
+            } 
+        }
+        
+        return !stack.isEmpty();
+    }
+}
