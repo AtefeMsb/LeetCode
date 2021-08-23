@@ -59,37 +59,48 @@ public class NestedIterator implements Iterator<Integer> {
 /**
  * Stack
  */
-public class NestedIterator implements Iterator<Integer> {
-    
-    Deque<NestedInteger> stack = new ArrayDeque<>();
-    // In the constructor, we push all the nestedList into the stack from back to front, so when we pop the stack, it returns the very first element.
-    public NestedIterator(List<NestedInteger> nestedList) {
-        prepareStack(nestedList);
-    }
+import java.util.NoSuchElementException;
 
+public class NestedIterator implements Iterator<Integer> {
+
+    // In Java, the Stack class is considered deprecated. Best practice is to use a Deque instead. 
+    private Deque<NestedInteger> stack;
+    
+    public NestedIterator(List<NestedInteger> nestedList) {
+        // The constructor puts them on in the order we require. No need to reverse.
+        stack = new ArrayDeque(nestedList);
+    }
+        
+    
     @Override
     public Integer next() {
-        if (!hasNext()) {
-            return null;
-        }
+        // As per java specs, throw an exception if there's no elements left.
+        if (!hasNext()) throw new NoSuchElementException();
+        // hasNext ensures the stack top is now an integer. Pop and return
+        // this integer.
         return stack.pop().getInteger();
     }
 
-    // in the hasNext() function, we peek the first element in stack currently, and if it is an Integer,
-    // we will return true and pop the element. If it is a list, we will further flatten it.
-    // This is iterative version of flatting the nested list. Again, we need to iterate from the back to front of the list.
+    
     @Override
     public boolean hasNext() {
-        while (!stack.isEmpty() && !stack.peek().isInteger()) {
-            List<NestedInteger> list = stack.pop().getList();
-            prepareStack(list);
-        }
+        // Check if there are integers left by getting one onto the top of stack.
+        makeStackTopAnInteger();
+        // If there are any integers remaining, one will be on the top of the stack,
+        // and therefore the stack can't possibly be empty.
         return !stack.isEmpty();
     }
-    
-    private void prepareStack(List<NestedInteger> nestedList) {
-        for (int i = nestedList.size() - 1; i >= 0; i--) {
-            stack.push(nestedList.get(i));
+
+
+    private void makeStackTopAnInteger() {
+        // While there are items remaining on the stack and the front of 
+        // stack is a list (i.e. not integer), keep unpacking.
+        while (!stack.isEmpty() && !stack.peek().isInteger()) {
+            // Put the NestedIntegers onto the stack in reverse order.
+            List<NestedInteger> nestedList = stack.pop().getList();
+            for (int i = nestedList.size() - 1; i >= 0; i--) {
+                stack.push(nestedList.get(i));
+            }
         }
     }
 }
