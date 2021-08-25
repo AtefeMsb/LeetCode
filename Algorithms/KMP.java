@@ -1,6 +1,7 @@
-package Algorithms;
-
 // JAVA program for implementation of KMP pattern searching algorithm 
+/**
+ * KMP is for pattern search in string
+ */
 
 public class KMP { 
 
@@ -83,4 +84,3 @@ public class KMP {
 		new KMP().KMPSearch(pat, txt); 
 	} 
 } 
-// This code has been contributed by Amit Khandelwal. 
