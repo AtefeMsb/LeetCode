@@ -53,8 +53,8 @@ public class Solution {
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true;
         
-        // i is the end
-        // j is the start
+        // i is the end pointer
+        // j is the start pointer
         for (int i = 1; i <= s.length(); i++) {
             for (int j = 0; j < i; j++) {
                 // if position j false, no need to continue

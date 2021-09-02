@@ -31,29 +31,33 @@ class Solution {
 }
 // =======================================
 /**
- * tabulation
+ * Dynamic Programming
+ * time:  O(amount * len(coins))
+ * space: O(amount)
  */
 class Solution {
     public int coinChange(int[] coins, int amount) {
         
-        // to make faster, sort the coins
-        Arrays.sort(coins);
+        if (coins.length == 0) return -1;
         
-        int[] table = new int[amount + 1];
-        Arrays.fill(table, amount + 1);
+        // sorting the coin array makes the algorithm run faster
+        // Arrays.sort(coins);
         
-        table[0] = 0;
+        // amount + 1 is more than the value we look for
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;  // zero dollars needs no coin
         
-        for (int i = 0; i <= amount; i++) {
-            for (int j = 0; j < coins.length; j++) {
-                if (coins[j] <= i) {
-                    table[i] = Math.min(table[i], 1 + table[i - coins[j]]);
-                } else {
-                    continue;
+        // for each amount, check all the coin possible
+        for (int a = 1; a <= amount; a++) {
+            for (int c: coins) {
+                // if coin is less than or equal amount
+                if (a - c >= 0) {
+                    dp[a] = Math.min(dp[a], 1 + dp[a - c]);
                 }
             }
         }
         
-        return table[amount] > amount ? -1 : table[amount];
+        return dp[amount] != amount + 1 ? dp[amount] : -1;
     }
 }
