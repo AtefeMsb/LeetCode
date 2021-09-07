@@ -1,3 +1,6 @@
+/**
+ * UnionFind
+ */
 class UnionFind {
     
     private int[] parent;
@@ -65,3 +68,48 @@ class Solution {
     
 }
 // -------------------------------------------------------
+/**
+ * FIND A CYCLE IN AN UNDIRECTED GRAPH USING DFS
+ */
+class Solution {
+    public boolean validTree(int n, int[][] edges) {
+        
+        // if number of edges is less or more than n - 1, this graph is not a tree.
+        if (edges.length != n - 1) return false;
+        // empty graph is a tree
+        if (n == 0) return true;
+        
+        // create adjacency list
+        Map<Integer, List<Integer>> list = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            list.put(i, new ArrayList<Integer>());
+        }
+        for (int[] edge : edges) {
+            list.get(edge[0]).add(edge[1]);
+            list.get(edge[1]).add(edge[0]);
+        }
+        
+        Set<Integer> visited = new HashSet<>();
+        // The graph is a tree if: 
+        // 1. it has no cycle
+        // 2. the graph is connected, all the nodes have been visited (visited.size() == n)
+        return !hasCycle(list, visited, 0, -1) && visited.size() == n;
+    
+    }
+    
+    // dfs - finds out cycle in the graph
+    private boolean hasCycle(Map<Integer, List<Integer>> list, Set<Integer> visited,  int node, int prev) {
+        
+        if (visited.contains(node)) return true;
+        visited.add(node);
+        
+        for (int neighbor : list.get(node)) {
+            if (neighbor == prev) continue;
+            if (hasCycle(list, visited, neighbor, node)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}

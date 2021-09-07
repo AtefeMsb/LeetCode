@@ -2,7 +2,6 @@
  * UnionFind
  */
 class Solution {
-    // Union Find
     public int findCircleNum(int[][] isConnected) {
         if (isConnected == null || isConnected.length == 0) {
             return 0;
@@ -43,21 +42,24 @@ class Solution {
             return root[x] = find(root[x]);
         }
 
-        void union(int x, int y) {
-            int rootX = find(x);
-            int rootY = find(y);
-            if (rootX != rootY) {
-                if (rank[rootX] > rank[rootY]) {
-                    root[rootY] = rootX;
-                } else if (rank[rootX] < rank[rootY]) {
-                    root[rootX] = rootY;
-                } else {
-                    root[rootY] = rootX;
-                    rank[rootX] += 1;
-                }
-                count--;
+        public boolean union(int A, int B) {
+            int rootA = find(A);
+            int rootB = find(B);
+            // Check if A and B are already in the same set.(this means cycle was found)
+            if (rootA == rootB) {
+                return false;
             }
-        }
+            if (rank[rootA] < rank[rootB]) {
+                root[rootA] = rootB;
+                rank[rootB] += rank[rootA];
+            }
+            else {
+                root[rootB] = rootA;
+                rank[rootA] += rank[rootB];
+            }
+            count--;
+            return true;
+        } 
 
         int getCount() {
             return count;
