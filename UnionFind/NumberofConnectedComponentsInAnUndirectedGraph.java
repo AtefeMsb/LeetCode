@@ -1,3 +1,6 @@
+/**
+ * dfs
+ */
 class Solution {
     public int countComponents(int n, int[][] edges) {
         
@@ -58,5 +61,65 @@ class Solution {
             return count;
         }
         
+    }
+}
+// -----------------------------------------------------------
+/**
+ * union find
+ */
+class Solution {
+    public boolean validPath(int n, int[][] edges, int start, int end) {
+        
+        UnionFind uf = new UnionFind(n);
+        for (int[] edge : edges) {
+            uf.union(edge[0], edge[1]);
+        }
+        
+        return uf.isConnected(start, end);
+        
+    }
+    
+    class UnionFind {
+        int[] rank;
+        int[] root;
+        
+        public UnionFind(int size) {
+            rank = new int[size];
+            root = new int[size];
+            
+            for (int i = 0; i < size; i++) {
+                rank[i] = 1;
+                root[i] = i;
+            }
+        }
+        
+        public boolean isConnected(int x, int y) {
+            return find(x) == find(y);
+        }
+        
+        public int find(int x) {
+            if (x == root[x]) {
+                return x;
+            }
+            return root[x] = find(root[x]);
+        }
+        
+        public boolean union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX == rootY) return false;
+            if (rootX != rootY) {
+                if (rank[rootX] > rank[rootY]) {
+                    rank[rootX] += rank[rootY];
+                    root[rootY] = rootX;
+                } else {
+                   rank[rootY] += rank[rootX];
+                    root[rootX] = rootY; 
+                }
+            
+            }
+            
+            return true;
+        }
     }
 }
