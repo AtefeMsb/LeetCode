@@ -54,3 +54,35 @@ class Solution {
         return visited.get(node);
     }
 }
+// ---------------------------------------
+/**
+ * DFS 
+ */
+class Solution {
+    public Node cloneGraph(Node node) {
+        
+        if (node == null) return null;
+        Map<Node, Node> oldToNew = new HashMap<>();
+        return dfs(node, oldToNew);
+        
+    }
+    
+    public Node dfs(Node node, Map<Node, Node> oldToNew) {
+        
+        // base case - if already been visited and cloned only return it
+        if (oldToNew.containsKey(node)) {
+            return oldToNew.get(node);
+        }
+        
+        // clone the node
+        Node clone = new Node(node.val, new ArrayList<>());
+        oldToNew.put(node, clone);
+        
+        // clone all its neighbors
+        for (Node neigh : node.neighbors) {
+            clone.neighbors.add(dfs(neigh, oldToNew));
+        }
+        
+        return clone;
+    }
+}
