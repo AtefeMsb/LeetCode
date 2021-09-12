@@ -80,6 +80,7 @@ class Solution {
         if (n == 0) return true;
         
         // create adjacency list
+        // undirected graph so add the edges both ways
         Map<Integer, List<Integer>> list = new HashMap<>();
         for (int i = 0; i < n; i++) {
             list.put(i, new ArrayList<Integer>());
@@ -100,10 +101,12 @@ class Solution {
     // dfs - finds out cycle in the graph
     private boolean hasCycle(Map<Integer, List<Integer>> list, Set<Integer> visited,  int node, int prev) {
         
+        // if the node has already been seen
         if (visited.contains(node)) return true;
         visited.add(node);
         
         for (int neighbor : list.get(node)) {
+            // Edge Case: the immidiate node before current node won't be visited, because faulsy detects a loop!
             if (neighbor == prev) continue;
             if (hasCycle(list, visited, neighbor, node)) {
                 return true;

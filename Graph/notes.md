@@ -1,6 +1,6 @@
 # Cycle in Graph
 ### find cycle in directed graph: using DFS and 3 sets of (unvisited-visiting-visited).
-### find cycle in directed graph: using "Disjoint Set" and "DFS".
+### find cycle in UNdirected graph: using "Disjoint Set" and "DFS".
 
 # Breadth-first Search
 # BFS is solution for SHORTEST PATH problems.
@@ -37,3 +37,6 @@ DFS: Theta (V + E)
 
 1. Traverse all vertices in a “graph”;
 2. Traverse all paths between any two vertices in a “graph”.
+
+# Tree
+ any basic text will tell you that an undirected tree with 𝑛 nodes must have exactly "n - 1" edges
