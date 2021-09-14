@@ -31,3 +31,44 @@ class Solution {
             
     }
 }
+
+// -----------------------------------------------------------
+/**
+ * BFS
+ */
+class Solution {
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        
+        List<List<Integer>> result = new ArrayList<>();
+        LinkedList<List<Integer>> queue = new LinkedList<>();
+        int end = graph.length - 1;
+        
+        // all paths start from "0" and ends at "end"
+        List<Integer> firstPath = new ArrayList<>();
+        firstPath.add(0);
+        queue.add(firstPath);
+                
+        while (!queue.isEmpty()) {
+            
+            // pop a path from teh queue and check its last element
+            List<Integer> path = queue.remove();
+            int lastNode = path.get(path.size() - 1);
+            
+            // 1. if the last element is equal end, means the path is complete
+            if (lastNode == end) {
+                result.add(new ArrayList<>(path));
+            // 2. if not, add all the neighbors of last node to the path
+            } else {
+                int[] neighbors = graph[lastNode];
+                for (int neighbor : neighbors) {
+                    List<Integer> list = new ArrayList<>(path);
+                    list.add(neighbor);
+                    queue.add(list);
+                }
+             }
+        }
+        
+        return result;
+     
+    }
+}
