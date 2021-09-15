@@ -13,6 +13,8 @@
 - Stacks are LIFO (Last In, First Out).
 - You need to check people in the order they were added to the search list, so the search list needs to be a queue. Otherwise, you won’t get the shortest path.
 - Once you check someone, make sure you don’t check them again. Otherwise, you might end up in an infinite loop.
+- the “breadth-first search” algorithm can traverse all vertices of a “graph” and traverse all paths between two vertices. However,
+  the most efficient use case of “breadth-first search” is to quickly find the shortest path between two vertices in a “graph” where all edges have equal and positive weights.
 
 # Topological Sort
 - Only exists for DAG(Directed Acyclic Graph)
@@ -38,5 +40,11 @@ DFS: Theta (V + E)
 1. Traverse all vertices in a “graph”;
 2. Traverse all paths between any two vertices in a “graph”.
 
+
 # Tree
  any basic text will tell you that an undirected tree with 𝑛 nodes must have exactly "n - 1" edges
+
+# In Graph theory, the primary use cases of the “breadth-first search” (“BFS”) algorithm are:
+
+1. Traversing all vertices in the “graph”
+2. Finding the shortest path between two vertices in a graph where all edges have equal and positive weights.
