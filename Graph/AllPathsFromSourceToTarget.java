@@ -36,12 +36,16 @@ class Solution {
 /**
  * BFS
  */
+
 class Solution {
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         
         List<List<Integer>> result = new ArrayList<>();
         LinkedList<List<Integer>> queue = new LinkedList<>();
         int end = graph.length - 1;
+        
+        // TO PREVENT INFINITE LOOP IN CYCLE
+        Set<Integer> visited = new HashSet<>();
         
         // all paths start from "0" and ends at "end"
         List<Integer> firstPath = new ArrayList<>();
@@ -61,9 +65,12 @@ class Solution {
             } else {
                 int[] neighbors = graph[lastNode];
                 for (int neighbor : neighbors) {
-                    List<Integer> list = new ArrayList<>(path);
-                    list.add(neighbor);
-                    queue.add(list);
+                    // TO PREVENT INFINITE LOOP IN CYCLE
+                    if (!visited.contains(neighbor)) {
+                        List<Integer> list = new ArrayList<>(path);
+                        list.add(neighbor);
+                        queue.add(list);
+                    } 
                 }
              }
         }
