@@ -4,8 +4,9 @@
         - 1 means VISITING
         - 2 means VISITED
     2. start from each of vertices and if its is not visited (2), run isCyclicUtil function for it.
-    
-     // FINDING OUT IF GRAPH HAS CYCLE
+
+    ```java
+    // FINDING OUT IF GRAPH HAS CYCLE
     private boolean isCyclic(Map<Integer, List<Integer>> adjacencyList, int numCourses) {
         // state of each course vertices
         // 0 means UNVISITED
@@ -39,6 +40,7 @@
         states[crs] = 2;
         return false;
     }
+    ```
 
 ### 2. Topological Sort
 - only exists in 'directed acyclic graphps'.
