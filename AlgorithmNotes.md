@@ -47,6 +47,7 @@
     1. Course Schedule II
     2. Alien Dictionary
 
+```
   // if there is no cycle so topological order can be found
     int[] topologicalOrder = new int[numCourses];
     LinkedList<Integer> stack = new LinkedList<>();
@@ -66,7 +67,7 @@
     }
 
     // -------------------------------------------------------------
-    
+
     // TOPOLOGICAL SORT ALGORITHM - using DFS and Stack
     private void dfs(Map<Integer, List<Integer>> adjacencyList, Set<Integer> visited, LinkedList<Integer> stack, int crs) {
         
@@ -79,6 +80,7 @@
        
         stack.push(crs);
     }
+```
 
 ### Find Cycle In A UnDirected Graph:
 
