@@ -57,6 +57,8 @@ class Solution {
                 dfs(adjacencyList, visited, stack, dest);
             }
         }
+
+        // because there is no other neighbor to explore, we can add it to the stack
         stack.push(crs);
     
     }
