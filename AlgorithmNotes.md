@@ -1,4 +1,5 @@
-### 1. Find Cycle In A Directed Graph:
+### 1. Find Cycle In A Directed Graph
+    - DFS and states int array
     - use a states int array that cell means:
         - 0 means UNVISITED
         - 1 means VISITING
@@ -83,4 +84,25 @@
 ```
 
 ### Find Cycle In A UnDirected Graph:
+    - DFS and a set for visited
+    - EDGE CASE: pass the previous node to the function, so it does not count as loop mistakenly
+    - add both side of an edge to the adjacency list.
+
+    
+     private boolean hasCycle(Map<Integer, List<Integer>> list, Set<Integer> visited,  int node, int prev) {
+        
+        // if the node has already been seen
+        if (visited.contains(node)) return true;
+        visited.add(node);
+        
+        for (int neighbor : list.get(node)) {
+            // Edge Case: the immidiate node before current node won't be visited, because faulsy detects a loop!
+            if (neighbor == prev) continue;
+            if (hasCycle(list, visited, neighbor, node)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
