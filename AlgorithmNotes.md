@@ -5,7 +5,7 @@
         - 2 means VISITED
     2. start from each of vertices and if its is not visited (2), run isCyclicUtil function for it.
 
-    ```java
+    ```
     // FINDING OUT IF GRAPH HAS CYCLE
     private boolean isCyclic(Map<Integer, List<Integer>> adjacencyList, int numCourses) {
         // state of each course vertices
