@@ -23,7 +23,8 @@ class Solution {
       for (int i = 1; i < intervals.length; i++) {
           int currentMeetingStart = intervals[i][0];
           int earliestEndingTime = minHeap.peek();
-          if (currentStart >= earliestEnding) {
+          // no overlap 
+          if (currentMeetingStart >= earliestEndingTime) {
               minHeap.poll();
           } 
           // if old room is alocated or new room assigned, anyway the earliest ending time must be updated.
