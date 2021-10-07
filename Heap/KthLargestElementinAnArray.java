@@ -2,7 +2,7 @@ package Heap;
 
 /**
 Logic:
-Why use min heap:
+Why use MIN HEAP:
 while constructing the minheap we keep the size under k, each time throwing out the SMALLEST item
 or the ROOT of the heap, at the end there will be a heap with the kth largest element at its root
 */
