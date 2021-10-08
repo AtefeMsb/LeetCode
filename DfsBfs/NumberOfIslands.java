@@ -185,3 +185,54 @@ class Solution3 {
       return uf.getCount();
     }
   }
+  /**
+  * another BFS
+  */
+
+  class Solution {
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                
+                if (grid[i][j] == '1') {
+                    count++;
+                    bfs(grid, i, j);  
+                }
+            }
+        }
+        
+        return count; 
+    }
+    
+    private void bfs(char[][] grid, int i, int j) {
+        
+        LinkedList<int[]> queue = new LinkedList<>();  
+        queue.add(new int[]{i, j});
+
+        while (!queue.isEmpty()) {
+
+            int[] point = queue.remove();
+            int r = point[0];
+            int c = point[1];
+
+            grid[r][c] = '0';
+
+            int[][] directions = {{0, -1},{0, 1},{1, 0},{-1, 0}};
+
+            for (int[] dir : directions) {
+                int row = r + dir[0];
+                int col = c + dir[1];
+
+                if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] == '1') {
+                    queue.add(new int[]{row, col});
+                    grid[row][col] = '0';
+                }
+
+            }
+
+        }
+        
+    }
+}

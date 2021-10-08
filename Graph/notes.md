@@ -1,6 +1,6 @@
 # Cycle in Graph
-### find cycle in directed graph: using DFS and 3 sets of (unvisited-visiting-visited).
-### find cycle in UNdirected graph: using "Disjoint Set" and "DFS".
+### find cycle in directed graph: using DFS and 3 states array (unvisited-visiting-visited) for nodes. Example : Course Schedule
+### find cycle in UNdirected graph: using "Disjoint Set" or "DFS" and Set<Integer> visited.
 
 # Breadth-first Search
 # BFS is solution for SHORTEST PATH problems.
@@ -19,7 +19,7 @@
 # Topological Sort
 - Only exists for DAG(Directed Acyclic Graph)
 - All trees are DAG
-- will be implemented by using DFS and a boolean array (visited)
+- if graph is DAG, will be implemented by using stack and set
 
 # Dijkstra’s algorithm (Single Source Shortest Path)
 - Breadth-first search is used to calculate the shortest path for an unweighted graph.
