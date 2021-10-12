@@ -44,44 +44,37 @@ public class Solution {
  * space complexity: O(1)
  */
 class Solution {
+    // keep start and length of palindrome
+    int start = 0;
+    int length = 0;
     
     public String longestPalindrome(String s) {
-      
-        // boundry check
-        if (s == null) return null;
-        if ( s.length() < 2) return s;
         
-        int start = 0;
-        int end = 0;
-        
-        // check every character is the possible missle of the longest palindrome
-        for (int middle = 0; middle < s.length() - 1; middle++) {
-            // if substring length is odd
-            int len1 = expandRangeFromMiddle(s, middle, middle);
-            // if substring length is even
-            int len2 = expandRangeFromMiddle(s, middle, middle + 1);
+        for (int mid = 0; mid < s.length(); mid++) {
             
-            int len = Math.max(len1, len2);
-            
-            if (len > end - start) {
-                start = middle - ((len - 1) / 2);
-                end = middle + (len / 2);     
-            }
+            // odd palindrome
+           expandRange(s, mid, mid);
+            // even palindrome
+           expandRange(s, mid, mid + 1);
         }
         
-        return s.substring(start, end + 1);
+        return s.substring(start, start + length);
+        
     }
     
-    // this function finds the longest palindrome starts from middle of string
-    private int expandRangeFromMiddle(String str, int begin, int end) {
-
-        // move forward while the palindrome condition hold
-        while (begin >= 0 && end < str.length() && str.charAt(begin) == str.charAt(end)) {
-            begin--;
-            end++;
-        }
+    private void expandRange(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
+            }
         
-        return end - begin - 1; 
-              
+        // (right - left - 1) is because at the last round in the while loop left was left-- and right was right++
+        // in general finding the length of substring using index of Start and End is with this formula: (End - Start + 1)
+        // but here because of the changes in left and right: (right - 1 - (left + 1) + 1) = (right - left - 2 + 1)
+        if (length < right - left - 1) {
+            start = left + 1;
+            length = right - left - 1;
+        }
+     
     }
 }
