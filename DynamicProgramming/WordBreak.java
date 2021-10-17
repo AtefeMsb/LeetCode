@@ -39,6 +39,33 @@ class Solution {
     }
 }
 // ===============================================================================================
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        return wb(s, dict, new HashMap<>());
+    }
+    
+    private boolean wb(String s, Set<String> dict, Map<String, Boolean> memo) {
+        
+        if (memo.containsKey(s)) {
+            return memo.get(s);
+        }
+        
+        if (s.length() == 0) return true;
+        
+        // try all diffrent length
+        for (int i = 1; i <= s.length(); i++) {
+            if (dict.contains(s.substring(0, i)) && wb(s.substring(i), dict, memo)) {
+                memo.put(s, true);
+                return true;
+            }
+        }
+        memo.put(s, false);
+        return false;   
+    }
+}
+
+// ===============================================================================================
 /**
 * DYNAMIC IMPLEMENATION
 * USING TABULATUION
