@@ -9,7 +9,7 @@ import org.graalvm.compiler.nodes.memory.address.IndexAddressNode;
 
 /**
  * @param targetSum(int): target value - numbers(List): list of non-negative numbers
- * @return an array containing any combination of elements that add up to
+ * @return an array containing ANY combination of elements that add up to
  *         exactly target sum - NULL if there is no combination
  */
 
