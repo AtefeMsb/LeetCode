@@ -51,3 +51,29 @@ class Solution {
         return rob2;
     }
 }
+// -----------------------------------------
+// memoization
+class Solution {
+    public int rob(int[] nums) {
+        int lastIndex = nums.length - 1;
+        return memoization(nums, lastIndex, new HashMap<Integer, Integer>()); 
+    }
+    
+    // top-down approach
+    public int memoization(int[] nums, int n, Map<Integer, Integer> memo) {
+        
+        // base case
+        if (n < 0) {
+            return 0;
+        }
+        
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+        
+        // recurrence relation: pick the biggest either 1: only one house before or 2: current house plus two house before
+        int temp = Math.max(memoization(nums, n - 1, memo), memoization(nums, n - 2, memo) + nums[n]);
+        memo.put(n, temp);
+        return temp;  
+    }
+}
