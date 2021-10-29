@@ -78,7 +78,7 @@ class Solution {
 
 // ----------------------------------------------------------------
 /**
- * more readable dp by me
+ * tabulation - more readable dp by me
  */
 
  // fill the table from top to down
