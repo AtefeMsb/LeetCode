@@ -51,6 +51,7 @@ class Solution {
 // -------------------------------------------------
 /**
  * dp
+ * time and space: O(mn)
  */
 class Solution {
     public int minDistance(String word1, String word2) {
