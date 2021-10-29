@@ -1,3 +1,4 @@
+// source: https://www.youtube.com/watch?v=Mjy4hd2xgrs&t=632s
 /**
  * tabulation
  */
@@ -22,5 +23,48 @@ class Solution {
         }
         
         return table[coins.length][amount];
+    }
+}
+
+// -----------------------------------------------------
+/**
+ * memoization
+ */
+class Solution {
+    
+    public int change(int amount, int[] coins) {
+        
+        // edge case
+        if (coins.length == 0) return 0;
+        
+        return memoization(amount, coins, 0, new HashMap<String, Integer>());
+        
+    }
+    
+    public int memoization(int amount, int[] coins, int index, Map<String, Integer> memo) {
+        
+        // base case
+        // can not find a solution
+         if (index >= coins.length || amount < 0) {
+            return 0;
+        }
+        
+        // a possible solution is found
+        if (amount == 0) {
+            return 1;
+        }
+        
+        // check memo table
+        String key = index + "-" + amount;
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+        
+        
+        // choices are 1. pick this coin OR  2. not pick this coin
+        int temp = memoization(amount - coins[index], coins, index, memo) + memoization(amount, coins, index + 1, memo);
+        memo.put(key, temp);
+
+        return temp;
     }
 }

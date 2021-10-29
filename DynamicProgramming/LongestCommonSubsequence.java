@@ -5,35 +5,36 @@
 */
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
-        return recursion(text1, text2, 0, 0, new HashMap<String, Integer>()); 
+        return memoization(text1, text2, 0, 0, new HashMap<String, Integer>());  
     }
+    
+    public int memoization(String text1, String text2, int i, int j, Map<String, Integer> memo) {
         
-        private int recursion(String text1, String text2, int i, int j, Map<String, Integer> memo) {
+        // base case
+        if (i >= text1.length() || j >= text2.length()) {
+            return 0;
+        }
+        
+        // check the memo
+        String key = i + "," + j;
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+        
+        int count = 0;
+        // found one similar character
+        if (text1.charAt(i) == text2.charAt(j)) {
+            count = 1 + memoization(text1, text2, i + 1, j + 1, memo);
             
-            // base case
-            if (i >= text1.length() || j >= text2.length()) {
-                return 0;
-            }
-            
-            // check the memo
-            if (memo.containsKey(i + "," + j)) {
-                return memo.get(i + "," + j);
-            }
-            
-            // if we found a match
-            if (text1.charAt(i) == text2.charAt(j)) {
-                int count = 1 + recursion(text1, text2, i + 1, j + 1, memo);
-                memo.put(i + "," + j, count);
-                return count;
-            // if we didn't find a match
-            } else {
-                int count = Math.max(recursion(text1, text2, i + 1, j, memo),
-                                     recursion(text1, text2, i, j + 1, memo));
-                memo.put(i + "," + j, count);
-                return count;
-            }
+        } else {
+            count = Math.max(memoization(text1, text2, i + 1, j, memo),
+                                 memoization(text1, text2, i, j + 1, memo));
             
         }
+        
+        memo.put(key, count);
+        return count;
+    }
 }
 // ==============================================
 // src: https://github.com/bephrem1/backtobackswe/blob/master/Dynamic%20Programming%2C%20Recursion%2C%20%26%20Backtracking/LongestCommonSubsequence/BottomUp.java

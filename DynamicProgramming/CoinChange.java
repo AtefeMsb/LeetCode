@@ -1,5 +1,7 @@
 /**
  * Memoization - top down approach
+ * time:  O(amount * len(coins))
+ * space: O(amount)
  */
 class Solution {
     public int coinChange(int[] coins, int amount) {
@@ -14,7 +16,9 @@ class Solution {
         }
         
         // base case
+        // can not make negative amount with coins
         if (amount < 0) return -1;
+        // no coin is neede to make the amount 0
         if (amount == 0) return 0;
         
         int min = Integer.MAX_VALUE;
