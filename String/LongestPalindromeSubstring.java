@@ -1,6 +1,41 @@
 package String;
 
 /**
+ * expand from the middle function
+ */
+class Solution {
+    public String longestPalindrome(String s) {
+        
+        String result = "";
+        
+        for (int i = 0; i < s.length(); i++) {
+            // odd length
+            result = helper(s, i, i, result);
+            
+            // even length
+            result = helper(s, i, i + 1, result);
+        }
+       
+        return result;
+    }
+    
+    public String helper(String s, int left, int right, String result) {
+            
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            if (right - left + 1 > result.length()) {
+                result = s.substring(left, right + 1);
+            }
+            left--;
+            right++;
+        }
+        
+        return result;
+    }
+    
+    
+}
+// ------------------------------------------------------
+/**
  * dynamic programming - tabulation
  * time complexity: O(n^2)
  * space complexity: O(n^2)
