@@ -110,3 +110,59 @@ class Solution {
         
     }
 }
+
+// ----------------------------------------------------
+// best answer
+class Solution {
+    public String decodeString(String s) {
+        
+        LinkedList<Character> stack = new LinkedList<>();
+        
+        for (int index = 0; index < s.length(); index++) {
+            
+            
+            if (s.charAt(index) != ']') {
+                
+                stack.push(s.charAt(index));
+            
+            // when see a close bracket
+            } else {
+                
+                // step 1: get all the characters inside []
+                StringBuilder sb = new StringBuilder();
+                while (Character.isLetter(stack.peek())) {
+                    sb.insert(0, stack.pop());
+                }
+                String letters = sb.toString();
+                
+                // step 2: discard '['
+                stack.pop();
+                
+                // step 3: get all the digits before []
+                sb = new StringBuilder();
+                while (!stack.isEmpty() && Character.isDigit(stack.peek())) {
+                    sb.insert(0, stack.pop());
+                }
+                
+                int count = Integer.valueOf(sb.toString());
+                
+                // step 4: add the letters from inside [], COUNT times to teh stack
+                for (int i = 0; i < count; i++) {
+                    for (char l : letters.toCharArray()) {
+                        stack.push(l);
+                    }
+                }
+                
+            }
+        }
+        
+        // because the string gets reversed when added to stack
+        // we reverse them again by inserting to 0 index
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty()) {
+            result.insert(0, stack.pop());
+        }
+        
+        return result.toString();
+    }
+}

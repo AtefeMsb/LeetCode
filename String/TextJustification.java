@@ -13,7 +13,7 @@ class Solution {
             int j = i + 1;
             // only holds the length of characters (no spaces)
             int lineLength = words[i].length();
-            // j - i - 1 : number of section for spaces (spaces between characters)
+            // j - i - 1 : number of section of spaces (spaces between characters)
             while (j < n && (lineLength + words[j].length() + (j - i - 1)) < maxWidth) {
                 lineLength += words[j].length();
                 j++;
