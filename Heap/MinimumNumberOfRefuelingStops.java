@@ -1,3 +1,6 @@
+/**
+ * Time Complexity: O(NlogN), where N is the length of stations.
+ */
 class Solution {
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
         
