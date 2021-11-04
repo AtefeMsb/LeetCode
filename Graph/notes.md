@@ -19,7 +19,7 @@
 # Topological Sort
 - Only exists for DAG(Directed Acyclic Graph)
 - All trees are DAG
-- if graph is DAG, will be implemented by using stack and set
+- if graph is DAG, will be implemented by using stack and visited set
 
 # Dijkstra’s algorithm (Single Source Shortest Path)
 - Breadth-first search is used to calculate the shortest path for an unweighted graph.
