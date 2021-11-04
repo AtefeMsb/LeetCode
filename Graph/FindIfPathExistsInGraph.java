@@ -43,3 +43,48 @@ class Solution {
         return false;  
     }
 }
+
+// ---------------------------------------------
+/**
+ * BFS
+ */
+class Solution {
+    public boolean validPath(int n, int[][] edges, int start, int end) {
+                
+        // create an adjacency list
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            graph.put(i, new ArrayList<>());
+        }
+        for (int[] edge : edges) {
+            graph.get(edge[0]).add(edge[1]);
+            graph.get(edge[1]).add(edge[0]);
+        }
+        
+        LinkedList<Integer> queue = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+        queue.add(start);
+                
+          while (!queue.isEmpty()) {
+            
+            // pop a path from teh queue and check its last element
+            int lastNode = queue.remove();
+            visited.add(lastNode);
+            
+            // 1. if the last element is equal end, means the path is complete
+            if (lastNode == end) {
+                return true;
+            // 2. if not, add all the neighbors of last node to the path
+            } else {
+                List<Integer> neighbors = graph.get(lastNode);
+                for (int neighbor : neighbors) {
+                    if (!visited.contains(neighbor)) {
+                        queue.add(neighbor);
+                    }
+                }
+             }
+        }
+        
+        return false;
+    }
+}
