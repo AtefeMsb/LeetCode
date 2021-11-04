@@ -13,6 +13,8 @@ class Node {
         neighbors = _neighbors;
     }
 };
+
+// visited or oldToNew is BASICALLY USED AS VISITED ARRAY TO STOP THE INFINITE LOOP AND ALSO KEEP THE CLONES.
 */
 // Breadth First Search
 // Time Complexity : O(N + M), where N is a number of nodes (vertices) and M is a number of edges.

@@ -1,6 +1,6 @@
 # Cycle in Graph
 ### find cycle in directed graph: using DFS and 3 states array (unvisited-visiting-visited) for nodes. Example : Course Schedule
-### find cycle in UNdirected graph: using "Disjoint Set" or "DFS" and Set<Integer> visited.
+### find cycle in UNdirected graph: using "Disjoint Set" or "DFS" and Set<Integer> visited. Example : (261. Graph Valid Tree)
 
 # Breadth-first Search
 # BFS is solution for SHORTEST PATH problems.
