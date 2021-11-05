@@ -67,3 +67,33 @@ class Solution {
     }
 }
 // ------------------------------------------
+/**
+ * dfs
+ */
+
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+        
+        int count = 0;
+        Set<Integer> visited = new HashSet<>();
+        for (int i = 0; i < isConnected.length; i++) {
+            if (!visited.contains(i)) {
+                visited.add(i);
+                count++;
+                dfs(isConnected, i, visited);
+            }
+        }
+        
+        return count;
+    }
+    
+    public void dfs(int[][] isConnected, int i, Set<Integer> visited) {
+        
+        for (int j = 0; j < isConnected.length; j++) {
+            if (isConnected[i][j] == 1 && !visited.contains(j)) {
+                visited.add(j);
+                dfs(isConnected, j, visited);
+            }
+        }        
+    }
+}
