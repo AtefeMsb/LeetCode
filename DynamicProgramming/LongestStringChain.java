@@ -15,7 +15,7 @@ class Solution {
             wordsPresent.add(word);
         }
         
-        // find the maxium sequence that end with this word
+        // find the maxium sequence that ENDS WITH this word
         for (String word : words) {
             memoization(wordsPresent, word, memo);
         }
