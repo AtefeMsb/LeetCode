@@ -48,3 +48,25 @@ class Solution2 {
         return memo.get(i);
     }
 }
+
+// another memo
+class Solution {
+    public int climbStairs(int n) {
+        return memoization(n, n, new HashMap<>());
+    }
+    
+    private int memoization(int i, int n, HashMap<Integer, Integer> memo) {
+        
+        if (memo.containsKey(i)) {
+            return memo.get(i);
+        }
+        
+       if (i == 1) return 1;
+       if (i == 2) return 2;
+    
+        
+        int result = memoization(i - 1, n, memo) + memoization(i - 2, n, memo);
+        memo.put(i, result);    
+        return result;
+    }
+}

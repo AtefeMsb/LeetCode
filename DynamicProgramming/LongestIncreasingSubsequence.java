@@ -32,3 +32,37 @@ class Solution {
 }
 
 // ------------------------------------------------------
+/**
+ * memoization
+ * time limit error on leetcode
+ */
+
+class Solution {
+    public int lengthOfLIS(int[] nums) { 
+        return memoization(nums, 0, Integer.MIN_VALUE, new HashMap<String, Integer>()); 
+    }
+    
+    public int memoization(int[] nums, int i, int prevValue, Map<String, Integer> memo) {
+        
+        if (i == nums.length) {
+            return 0;
+        }
+        
+        String key = i + "-" + prevValue;
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+        
+        int notTake = memoization(nums, i + 1, prevValue, memo);
+        int take = Integer.MIN_VALUE;
+        if (nums[i] > prevValue) {
+            take = 1 + memoization(nums, i + 1, nums[i], memo);
+        }
+        
+        int result = Math.max(take, notTake);
+        memo.put(key, result);
+        
+        return result;
+        
+    }
+}
