@@ -47,13 +47,14 @@ class ReorderList {
       ListNode second = prev;
         
       while (second.next != null) {
-        tmp = first.next;
+        ListNode tmp1 = first.next;
+        ListNode tmp2 = second.next;
+          
         first.next = second;
-        first = tmp;
+        second.next = tmp1;
   
-        tmp = second.next;
-        second.next = first;
-        second = tmp;
+        first = tmp1;
+        second = tmp2;
       }
     }
   }
