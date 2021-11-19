@@ -10,18 +10,22 @@ public class Codec {
         
         queue.add(root);
         while (!queue.isEmpty()) {
-            TreeNode cur = queue.poll();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.poll();
             
-            if (cur == null) {
-                tree.append("null,");
-                continue;
+                if (cur == null) {
+                    tree.append("null,");
+                    continue;
+                }
+                tree.append(cur.val);
+                tree.append(",");
+
+                // even null nodes gets push in the queue
+                queue.add(cur.left);
+                queue.add(cur.right);
             }
-            tree.append(cur.val);
-            tree.append(",");
             
-            // even null nodes gets push in the queue
-            queue.add(cur.left);
-            queue.add(cur.right);
         }
         return tree.toString();
     }
