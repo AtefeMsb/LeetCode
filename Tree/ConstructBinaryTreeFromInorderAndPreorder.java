@@ -43,7 +43,7 @@ class Solution {
         // create right subtree
         root.right = helper(index + 1, inorderRightIndex);
         
-        // return root
+        // return rooth
         return root;
      
     }
