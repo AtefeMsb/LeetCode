@@ -52,3 +52,27 @@
         
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val); 
     }
+
+// ------------------------------------------------------------------
+// recursive - easier solution
+class Solution {
+    public int targetSum;
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+
+        this.targetSum = targetSum;
+        return dfs(root, 0);
+        
+    }
+    
+    public boolean dfs(TreeNode root, int currentSum) {
+        if (root == null) return false;
+        
+        currentSum += root.val;
+        if (root.left == null && root.right == null && currentSum == targetSum) {
+            return true;
+        }
+        
+        return dfs(root.left, currentSum) || dfs(root.right, currentSum);
+        
+    }
+}
