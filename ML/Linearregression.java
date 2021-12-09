@@ -1,31 +1,45 @@
-// source: https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931
+// https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931
+/*
+formula of a line: y = mx + b
+loss function: Mean Square Error --> J = 1/n sigma(y - y`)^2 --> 1/n sigma(y - (mx + b))^2
+Derivatives of loss function:
+dm = -2/n sigma x(y - y`)
+db = -2/n sigma (y - y`)
+how to update current value of m and b at each iteration:
+m = m - learningRate * dm
+b = b - learningRate * db
+*/
 
 public class LinearRegression {
     public static void main(String[] args) {
         double[][] data = {{1, 2}, {3, 2}, {5, 6}, {8, 7}, {6,6}, {20, 2}, {10, 1}};
 
-        // Gradient Descent
-        double[] parameters = gradientDescent(data, 5);
-        System.out.println("m:" + parameters[0]+ " ---- b:" + parameters[1]);
+        // fit the model
+        LinearRegression lr = new LinearRegression(0, 0, 0.001, 1000);
+        lr.fit(data);
+        System.out.println("m:" + lr.m + " ---- b:" + lr.b);
 
-        // make prediction
-        System.out.println(prediction(parameters[0], parameters[1], 30));
+        // predict
+        System.out.println(lr.predict(30));
     }
 
-    /*
-        formula of a line: y = mx + b
-        loss function (mean square error) --> J = 1/n sigma(y - y`)^2 --> 1/n sigma(y - (mx + b))^2
-        Derivatives of loss function:
-        dm = -2/n sigma x(y - y`)
-        db = -2/n sigma (y - y`)
-        how to update current value of m and b at each iteration:
-        m = m - learningRate * dm
-        b = b - learningRate * db
-     */
-    public static double[] gradientDescent(double[][] data, int epochs) {
-        double m = 0;
-        double b = 0;
-        double learningRate = 0.001;
+    // params
+    double m;
+    double b;
+    double learningRate;
+    int epochs;
+
+    // constructor
+    public LinearRegression(double m, double b, double learningRate, int epochs) {
+        this.m = m;
+        this.b = b;
+        this.learningRate = learningRate;
+        this.epochs = epochs;
+    }
+
+    // fit value of m and b using gradient descent algorithm
+    public void fit(double[][] data) {
+        // to avoid integer division in the formulas
         double n = data.length;
 
         // each epoch go through all the samples
@@ -44,25 +58,19 @@ public class LinearRegression {
                 sum2 += y - yPredicted;
             }
 
-//            System.out.println("sum1:" + sum1);
-//            System.out.println("sum2:" + sum2);
-
             // calculate the derivative
             double dm = (-2/n) * sum1;
             double db = (-2/n) * sum2;
-
-//            System.out.println("dm:" + dm);
-//            System.out.println("db:" + db);
 
             // update m and b
             m = m - (learningRate * dm);
             b = b - (learningRate * db);
 
         }
-        return new double[]{m, b};
+
     }
 
-    public static double prediction(double m, double b, double query) {
-        return m * query + b;
+    public double predict(double query) {
+        return this.m * query + this.b;
     }
 }
