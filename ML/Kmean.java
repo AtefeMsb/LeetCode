@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class Point  {
+class Point {
     double x;
     double y;
 
@@ -51,14 +51,25 @@ class Kmean {
         p1 = new Point(8, 8);
         points.add(p1);
         p1 = new Point(9, 9);
-        points.add(p1);
 
-        kmean(points, 3);
+        Kmean kmean = new Kmean(3, 100, points);
+        kmean.predict();
 
     }
 
-    public static void kmean(List<Point> points, int k) {
+    int k;
+    int numberIteration;
+    List<Point> points;
 
+    public Kmean(int k, int numberIteration, List<Point> points) {
+        this.k = k;
+        this.numberIteration = numberIteration;
+        this.points = points;
+    }
+
+    public void predict() {
+
+        // initialization
         // generate random centroids for start
         List<Point> centroids = new ArrayList<>();
         int min = 0;
@@ -70,7 +81,7 @@ class Kmean {
         boolean finish = false;
         int iterations = 0;
 
-        while (iterations < 3) {
+        while (iterations < this.numberIteration) {
 
             // initialize the k clusters with empty list
             List<List<Point>> clusters = new ArrayList<>();
@@ -86,20 +97,13 @@ class Kmean {
             List<Point> newCentroids = calculateCentroid(clusters);
 
             logging(clusters, centroids);
+
+            // check for convergence
+            if (isConverged(centroids, newCentroids, clusters)) {
+                break;
+            }
+
             System.out.println("-------------------------");
-
-            /*
-            // Calculates total distance between new and old Centroids
-            double diff = 0;
-            for (int i = 0; i < centroids.size(); i++) {
-                diff += Point.calculateDistance(centroids.get(i), newCentroids.get(i));
-            }
-            System.out.println("diff: " + diff);
-
-            if (diff < 4) {
-                finish = true;
-            }
-            */
 
             centroids = newCentroids;
             iterations++;
@@ -107,24 +111,7 @@ class Kmean {
         } // end of while
     }
 
-    public static void logging(List<List<Point>> clusters, List<Point> centroids) {
-        for (int i = 0; i < clusters.size(); i++) {
-            System.out.println("cluster id: " + (i + 1));
-
-            if (clusters.get(i).size() == 0) {
-                System.out.println("empty cluster");
-                continue;
-            }
-
-            System.out.println("centroid: " + centroids.get(i));
-            for (Point p : clusters.get(i)) {
-                System.out.print(p);
-            }
-            System.out.println();
-        }
-    }
-
-    public static void assignCluster(List<List<Point>> clusters, List<Point> centroids,List<Point> points) {
+    public void assignCluster(List<List<Point>> clusters, List<Point> centroids,List<Point> points) {
         for (Point p : points) {
             double distance = Integer.MAX_VALUE;
             int clusterId = 0;
@@ -141,7 +128,7 @@ class Kmean {
         }
     }
 
-    public static List<Point> calculateCentroid(List<List<Point>> clusters) {
+    public List<Point> calculateCentroid(List<List<Point>> clusters) {
         List<Point> newCentroids = new ArrayList<>();
         for (List<Point> list : clusters) {
             Double sumX = 0.0;
@@ -151,12 +138,42 @@ class Kmean {
                 sumX += p.x;
                 sumY += p.y;
             }
-
-            newCentroids.add(new Point(sumX/count, sumY/count));
+            newCentroids.add(new Point((double)(sumX/count), (double)(sumY/count)));
         }
-
         return newCentroids;
     }
 
-}
+    public boolean isConverged(List<Point> oldCentroid, List<Point> newCentroid, List<List<Point>> clusters) {
+        double diff = 0;
+        for (int i = 0; i < oldCentroid.size(); i++) {
+            // for empty clusters
+            if (clusters.get(i).size() == 0) return false;
+            diff += Point.calculateDistance(oldCentroid.get(i), newCentroid.get(i));
+        }
 
+        System.out.println("diff: " + diff);
+
+        if (diff == 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void logging(List<List<Point>> clusters, List<Point> centroids) {
+        for (int i = 0; i < clusters.size(); i++) {
+            System.out.println("cluster id: " + (i + 1));
+
+            if (clusters.get(i).size() == 0) {
+                System.out.println("empty cluster");
+                continue;
+            }
+
+            System.out.println("centroid: " + centroids.get(i));
+            for (Point p : clusters.get(i)) {
+                System.out.print(p);
+            }
+            System.out.println();
+        }
+    }
+}
