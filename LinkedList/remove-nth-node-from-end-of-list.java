@@ -26,3 +26,31 @@ class Solution {
         return dummy.next;
     }
 }
+
+// -----------------------------------------------------------
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        
+        ListNode left = dummy;
+        // n + 1 step away
+        ListNode right = head;
+        while (n > 0 && right != null) {
+            right = right.next;
+            n--;
+        }
+            
+        while (right != null) {
+            left = left.next;
+            right = right.next;
+        }
+        
+        // now the left is on previous node to be deleted
+        left.next = left.next.next;
+        
+        
+        return dummy.next;
+    }
+}
