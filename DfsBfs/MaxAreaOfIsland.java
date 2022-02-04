@@ -9,9 +9,9 @@ class Solution {
         // initialize the serach from each cell
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                
-                maxArea = Math.max(maxArea, dfs(i, j, grid));
-                
+                if (grid[i][j] == 1) {
+                    maxArea = Math.max(maxArea, dfs(i, j, grid));
+                }
             }
         }
     
@@ -31,8 +31,10 @@ class Solution {
         
         // explore the 4 directions
         return  1 + 
-                dfs(row - 1, col, grid) + dfs(row + 1, col, grid) +
-                dfs(row, col - 1, grid) + dfs(row, col + 1, grid);
+                dfs(row - 1, col, grid) +
+                dfs(row + 1, col, grid) +
+                dfs(row, col - 1, grid) +
+                dfs(row, col + 1, grid);
         
     }
 }
