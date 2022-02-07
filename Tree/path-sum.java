@@ -46,11 +46,12 @@
         }
         
         // if reach a leaf and the amount of sum been already accumulated
-        if (root.left == null && root.right == null && sum - root.val == 0) {
+        sum -= root.val;
+        if (root.left == null && root.right == null && sum  == 0) {
             return true;
         }
         
-        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val); 
+        return hasPathSum(root.left, sum) || hasPathSum(root.right, sum); 
     }
 
 // ------------------------------------------------------------------
