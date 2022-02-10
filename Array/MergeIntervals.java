@@ -24,3 +24,28 @@ class Solution {
         
     }
 }
+
+// -----------------------------------------------------------
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
+        LinkedList<int[]> merged = new LinkedList<>();
+        
+        merged.add(intervals[0]);
+        for (int i = 1; i < intervals.length; i++) {
+            int[] last = merged.getLast();
+            int[] cur = intervals[i];
+            
+            // overlap
+            if (cur[0] <= last[1]) {
+                last[1] = Math.max(last[1], cur[1]);
+            // non overlap
+            } else {
+                merged.add(cur);
+            }
+        }
+        
+        return merged.toArray(new int[merged.size()][]);
+    }    
+}
