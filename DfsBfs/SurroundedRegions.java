@@ -1,51 +1,52 @@
-package DfsBfs;
-
 class Solution {
     public void solve(char[][] board) {
         
         int n = board.length;
         int m = board[0].length;
         
-        // 1- find all the edge cells
+        // 1. (DFS) capture unsurronded/edge regions (O -> T)
         for (int i = 0; i < n; i++) {
-            if (board[i][0] == 'O') dfs(board, i, 0);  // first column
-            if (board[i][m - 1] == 'O') dfs(board, i, m - 1);  // last column
+            if (board[i][0] == 'O') dfs(i, 0, board);           // first col
+            if (board[i][m - 1] == 'O') dfs(i, m - 1, board);   // last col
         }
-           
+        
         for (int j = 0; j < m; j++) {
-            if (board[0][j] == 'O') dfs(board, 0, j);  // first row
-            if (board[n - 1][j] == 'O') dfs(board, n - 1, j);  // last row
-            
+            if (board[0][j] == 'O') dfs(0, j, board);           // first row
+            if (board[n - 1][j] == 'O') dfs(n - 1, j, board);   // last row
         }
- 
-        // 2- return non-edge O-cell into X-cell
+        
+        // 2. captured surronded regions (O -> X)
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                // if its 'O' convert to 'X'
                 if (board[i][j] == 'O') {
                     board[i][j] = 'X';
-                // if its 'E' convert back to 'O'
-                } else if (board[i][j] == 'E') {
-                     board[i][j] = 'O';
                 }
-                
+            }
+        }
+        
+        // 3. uncapture unsurronded regions (T -> O)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] == 'T') {
+                    board[i][j] = 'O';
+                }
             }
         }
         
     }
     
-    // converts each edge O-cell to E-cell
-    private void dfs(char[][] board, int i, int j) {
+    // convert edge 'O' cells to 'T' cells
+    public void dfs(int r, int c, char[][] board) {
+        
         // base case
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != 'O') {
+        if (r < 0 || r >= board.length || c < 0 || c >= board[0].length || board[r][c] != 'O') {
             return;
         }
         
-        board[i][j] = 'E';
-        
-        dfs(board, i - 1, j);
-        dfs(board, i + 1, j);
-        dfs(board, i, j - 1);
-        dfs(board, i, j + 1);  
+        board[r][c] = 'T';
+        dfs(r + 1, c, board);
+        dfs(r - 1, c, board);
+        dfs(r, c + 1, board);
+        dfs(r, c - 1, board);
     }
 }
