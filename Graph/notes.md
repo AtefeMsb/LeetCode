@@ -17,7 +17,7 @@
   the most efficient use case of “breadth-first search” is to quickly find the shortest path between two vertices in a “graph” where all edges have equal and positive weights.
 
 # Topological Sort
-- Only exists for DAG(Directed Acyclic Graph)
+- Only exists for DAG (Directed Acyclic Graph)
 - All trees are DAG
 - if graph is DAG, will be implemented by using stack and visited set
 
