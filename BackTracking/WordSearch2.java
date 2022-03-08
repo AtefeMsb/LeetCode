@@ -75,3 +75,86 @@ class Solution {
       
   }
 } 
+
+// -----------------------------------------------------------------
+class TrieNode {
+    Map<Character, TrieNode> children;
+    boolean isComplete;
+    
+    public TrieNode() {
+        this.children = new HashMap<>();
+        this.isComplete = false;
+    }
+}
+
+class Solution {
+    int rows;
+    int cols;
+    Set<String> result;
+    Set<String> visited;
+    char[][] board;
+    
+    public List<String> findWords(char[][] board, String[] words) {
+        
+        this.rows = board.length;
+        this.cols = board[0].length;
+        this.result = new HashSet<>();
+        this.visited = new HashSet<>();
+        this.board= board;
+        
+        
+        // add all the words to a trie
+        TrieNode root = new TrieNode();
+        
+        for (String word : words) {
+            TrieNode cur = root;
+            for (char ch : word.toCharArray()) {
+                if (!cur.children.containsKey(ch)) {
+                    cur.children.put(ch, new TrieNode());
+                }
+                cur = cur.children.get(ch);
+            }
+            cur.isComplete = true;
+        }
+        
+        // for each cell run dfs
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                dfs(i, j, root, new StringBuilder()); 
+            }
+        }
+        
+        // convert set to list
+        return new ArrayList<String>(result);
+    }
+    
+    public void dfs(int i, int j, TrieNode root, StringBuilder sb) {
+        
+        String key = i + "-" + j;
+        
+        // base case
+        if (i < 0 || j < 0 || i >= rows || j >= cols || !root.children.containsKey(board[i][j]) || visited.contains(key)) {
+            return;
+        }
+        
+        // choose
+        visited.add(key);
+        root = root.children.get(board[i][j]);
+        sb.append(board[i][j]);
+        
+        // if we find a word
+        if (root.isComplete == true) {
+            result.add(sb.toString());
+        }
+        
+        // recurse
+        dfs(i - 1, j, root, sb);
+        dfs(i + 1, j, root, sb);
+        dfs(i, j - 1, root, sb);
+        dfs(i, j + 1, root, sb);
+        
+        // unchoose
+        visited.remove(key);
+    }
+    
+}
