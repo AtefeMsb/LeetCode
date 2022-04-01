@@ -29,7 +29,7 @@ class Solution {
   
         // Left and Right pointer
         int l = 0;
-        int r = 0;g
+        int r = 0;
         
       
   
