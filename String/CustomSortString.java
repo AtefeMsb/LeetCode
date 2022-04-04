@@ -1,13 +1,15 @@
 class Solution {
     public String customSortString(String order, String s) {
         
+        // frequency map for s 
         Map<Character, Integer> mapS = new HashMap<>();
         for (char c : s.toCharArray()) {
             mapS.put(c, mapS.getOrDefault(c, 0) + 1);
         }
         
-        // characters that exist in both s and order
         StringBuilder sb = new StringBuilder();
+
+        // characters that exist in both s and order
         for (char c : order.toCharArray()) {
             if (mapS.containsKey(c)) {
                 int repeat = mapS.get(c);
