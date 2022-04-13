@@ -2,9 +2,9 @@ class Solution {
     public int minSwaps(int[] data) {
         
         // count number of ones in data
-        int ones = 0;
+        int windowSize = 0;
         for (int d : data) {
-            ones += d;
+            windowSize += d;
         }
         
         // keet the max amount of ones in a window
@@ -12,17 +12,15 @@ class Solution {
         int currentOnes = 0;
         
         int left = 0;
-        int right = 0;
         
         // exxpand the window
-        while (right < data.length) {
+        for (int right = 0; right < data.length; right++) {
             
             currentOnes += data[right];
-            right++;
             
             // shrink the window
             // the valid window size is less than "count of ones"
-            if (right - left > ones) {
+            if (right - left + 1 > windowSize) {
                 currentOnes -= data[left];
                 left++;
             }
@@ -31,7 +29,7 @@ class Solution {
             
         }
         
-        return ones - maximumOnes;
+        return windowSize - maximumOnes;
         
     }
 }
