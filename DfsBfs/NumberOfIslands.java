@@ -41,60 +41,48 @@ class Solution {
  * time complexity: O(M×N) where M is the number of rows and N is the number of columns.
  * O(min(M,N)) because in worst case where the grid is filled with lands, the size of queue can grow up to min(M,N).
  */
-class Solution2 {
-    public int numIslands(char[][] grid) {
-        
-        if (grid == null || grid.length == 0) {
-            return 0;
-        }
-        
-        int islandCount = 0;
-        
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                
-                if (grid[i][j] == '1') {
-                    islandCount += 1;
-                    
-                    // sink the node
-                    grid[i][j] = '0';
-                    
-                    // start a bfs search
-                    Deque<int[]> queue = new ArrayDeque<>();
-                    queue.offer(new int[] {i, j});
-                    
-                    while (!queue.isEmpty()) {
+class Solution {
+  public int numIslands(char[][] grid) {
+      
+      int res = 0;
+      LinkedList<int[]> queue = new LinkedList<>();
+      int[][] dir = {{-1, 0}, {+1, 0}, {0, -1}, {0, +1}};
+      
+      for (int i = 0; i < grid.length; i++) {
+          for (int j = 0; j < grid[0].length; j++) {
+              
+              if (grid[i][j] == '0') continue;
+              if (grid[i][j] == '1') res++;
+              grid[i][j] = '0';
+              queue.add(new int[]{i, j});
+              
+              // start a bfs
+              while (!queue.isEmpty()) {
+                  
+                  int[] cur = queue.pop();
+                  int r = cur[0];
+                  int c = cur[1];
+                  
+                  for (int[] d : dir) {
                       
-                        int[] point = queue.poll();
-                        int r = point[0];
-                        int c = point[1];
-                        
-                        // sink the node
-                        grid[r][c] = '0';
-                        
-                        
-                        int[][] directions = {{0, -1},{0, 1},{1, 0},{-1, 0}};
-                        for (int[] direction : directions) {
-                            
-                            int row = r + direction[0];
-                            int col = c + direction[1];
-                            
-                            if (row >= 0 && row < grid.length && col >= 0 && col < grid[i].length && grid[row][col] == '1') {
-                                // sink the node
-                                grid[row][col] = '0';
-                                queue.offer(new int[] {row, col});
-                            }
- 
-                        }
- 
-                    }
-     
-                }
-            }
-        }
-        
-        return islandCount;
-    }
+                      int newR = r + d[0];
+                      int newC = c + d[1];
+                      
+                      if (newR < 0 || newC < 0 || newR >= grid.length || newC >= grid[0].length || grid[newR][newC] == '0') {
+                          continue;
+                      }
+                      
+                      grid[newR][newC] = '0';
+                      queue.add(new int[]{newR, newC});
+                  
+                  }    
+              }
+                
+          }
+      }
+      
+      return res;  
+  }
 }
 // -----------------------------------------
 /**
