@@ -1,3 +1,5 @@
+// run dfs to see all nodes
+// from each node start a search
 class Solution {
     int result = 0;
     public int pathSum(TreeNode root, int targetSum) {
@@ -29,3 +31,4 @@ class Solution {
         
     }
 }
+// ---------------------------------------------------
