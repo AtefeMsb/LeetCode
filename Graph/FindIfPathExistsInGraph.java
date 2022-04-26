@@ -67,7 +67,7 @@ class Solution {
                 
           while (!queue.isEmpty()) {
             
-            // pop a path from teh queue and check its last element
+            // pop a path from the queue and check its last element
             int lastNode = queue.remove();
             visited.add(lastNode);
             
