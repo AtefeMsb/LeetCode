@@ -1,41 +1,37 @@
-public class Solution {
+class Solution {
     public String countAndSay(int n) {
         
-        if (n <= 0) {
-            return "";
+        if (n <= 0) return "";
+        
+        String res = "1";
+        for (int i = 1; i < n; i++) {
+            res = util(res);
         }
         
-        String result = "1";
-        
-        for (int i = 1; i < n; i ++) {
-            result = build(result);
-        }
-        
-        return result;
+        return res;
     }
     
-    private String build(String result) {
+    private String util(String str) {
         
-        StringBuilder builder = new StringBuilder();
-        // pointer p
-        int p = 0;
-        while(p < result.length()) {
-            char val = result.charAt(p);
-            int count = 0;
+        StringBuilder sb = new StringBuilder();
+        
+        int i = 0;
+        while (i < str.length()) {
+            int j = i;
             
-            // while pointer is less than the end of array and still seeing the same val
-            // increase the count of occurence of the val
-            while (p < result.length() && result.charAt(p) == val){
-                p++;
-                count++;
+            while (j < str.length() && str.charAt(j) == str.charAt(i)) {
+                j++;
             }
             
-            // add the count to the result
-            builder.append(String.valueOf(count));
-            // add the val right after
-            builder.append(val);
+            String count = j - i + "";
+            char ch = str.charAt(i);
+            
+            sb.append(count);
+            sb.append(ch);
+            
+            i = j;
         }
-        
-        return builder.toString();
+    
+        return sb.toString();
     }
 }
