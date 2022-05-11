@@ -9,6 +9,8 @@ Each basket can have only one type of fruit. There is no limit to how many fruit
 You can start with any tree, but you can’t skip a tree once you have started.
 You will pick exactly one fruit from every tree until you cannot, i.e., you will stop when you have to pick from a third fruit type.
 Write a function to return the maximum number of fruits in both baskets.
+
+this problem is similar to: Longest Substring with at most 2 distinct characters
  */
 
 import java.util.HashMap;
