@@ -40,7 +40,7 @@ class Node {
 
 class Solution {
     public Node construct(int[][] grid) {
-        return helper(grid, 0, 0, grid.length);   
+        return helper(grid, 0, 0, grid.length);
     }
     
     private Node helper(int[][] grid, int x, int y, int len) {
@@ -50,24 +50,23 @@ class Solution {
             return new Node(grid[x][y] != 0, true, null, null, null, null);
         }
         
-        Node root = new Node();
+        
         Node topLeft = helper(grid, x, y, len / 2);
         Node topRight = helper(grid, x, y + len / 2, len / 2);
         Node bottomLeft = helper(grid, x + len / 2, y, len / 2);
-        Node bottomRight = helper(grid, x + len / 2, y + len / 2, len / 2);
+        Node bottomRight = helper(grid, x + len /2, y + len / 2, len / 2);
         
-        if (topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf 
-            && topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val) {
-            root.val = topLeft.val;
-            root.isLeaf = true;
+        // we found a leaf node
+        if (topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf && topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val) {
+            
+            return new Node(topLeft.val, true, null, null, null, null);
+            
         } else {
-            root.topLeft = topLeft;
-            root.topRight = topRight;
-            root.bottomLeft = bottomLeft;
-            root.bottomRight = bottomRight;
+            
+            // val could true or false for parent node, but isLeaf must be false
+            return new Node(true, false, topLeft, topRight, bottomLeft, bottomRight);
         }
-           
-        return root;
-        
+         
     }
+   
 }
