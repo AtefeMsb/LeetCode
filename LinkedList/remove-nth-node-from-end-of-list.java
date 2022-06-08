@@ -54,3 +54,33 @@ class Solution {
         return dummy.next;
     }
 }
+
+// ----------------------------------------
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        int count = 0;
+        ListNode cur = head;
+        
+        while (cur != null) {
+            cur = cur.next;
+            count++;
+        }
+        
+        // edge case when the first element needs to be removed
+        if (count == n) {
+            return head.next;
+        }
+        
+        int nodeToRemoveIndex = count - n - 1;
+        cur = head;
+        
+        for (int i = 0; i < nodeToRemoveIndex; i++) {
+            cur = cur.next;
+        }
+        
+        cur.next = cur.next.next;
+        
+        return head;
+    }
+}

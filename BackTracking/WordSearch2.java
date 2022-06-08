@@ -5,7 +5,7 @@ class TrieNode {
   Map<Character, TrieNode> children;
   public TrieNode() {
       word = null;
-      children = new HashMap<>();
+      children = new HashMap<>();b
   }
 }
 
